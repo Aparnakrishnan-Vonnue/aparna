@@ -1,19 +1,27 @@
-let wordToCheck = "listen"
-let sampleWord = "silent"
+let wordToCheck = "pole";
+let sampleWord = "loople";
 
-function toCheckWhetherAnagram(word, sample){
-  let empty = ""
-  for(let i = 0; i < word.length; i++){
-    for(let j = 0; j < sample.length; j++){
-      if(word[i] === sample[j]){
-        console.log(sample[j])
-        empty = sample[j]
-        
+function toCheckWhetherAnagram(word, sample) {
+  if (word.length !== sample.length) {
+    return false;
+  }
+
+  for (let i = 0; i < word.length; i++) {
+    let check = false;
+
+    for (let j = 0; j < sample.length; j++) {
+      if (word[i] === sample[j]) {
+        check = true;
+        break;
       }
     }
-    // return false
+
+    if (check === false) {
+      return false;
+    }
   }
-  
+
+  return true;
 }
 
-console.log(toCheckWhetherAnagram(wordToCheck, sampleWord))
+console.log(toCheckWhetherAnagram(wordToCheck, sampleWord));
