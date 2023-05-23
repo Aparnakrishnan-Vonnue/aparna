@@ -5,7 +5,7 @@ function toCheckWhetherAnagram(word, sample) {
   if (word.length !== sample.length) {
     return false;
   }
-
+4
   for (let i = 0; i < word.length; i++) {
     let check = false;
 
