@@ -1,18 +1,20 @@
-let stringInput = "Assistant"
+let stringInput = "assistant";
 
 const frequencyOfLetters = (str) => {
-  // debugger
-  let frequency = 1
-  let freqObj = {}
-  let i = 0
-  while(i < str.length){
-    freqObj[str[i]] = 1
-    if(str[i] === str[i + 1]){
-      console.log(str[i])
+  let freqObj = {};
+  let i = 0;
+  while (i < str.length) {
+    let frequency = 1;
+    freqObj[str[i]] = frequency
+    for (let j = 0; j < i; j++) {
+      if (str[i] === str[j]) {
+        frequency += 1
+        freqObj[str[i]] = frequency 
+      }
     }
-    i++
+    i++;
   }
-  console.log(freqObj)
-}
+  return freqObj;
+};
 
-console.log(frequencyOfLetters(stringInput))
+console.log(frequencyOfLetters(stringInput));
