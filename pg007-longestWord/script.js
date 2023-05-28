@@ -2,25 +2,25 @@ let stringInput = "   Hello world of programming a there   is there the    answe
 
 
 function returnLongestWord(str){
-  let pointer = 0
+  let indicator = 0
   let i = 0;
   let maxLength = 0
-  let startPosSave = 0
-  let endPosSave = 0
+  let startingPossition = 0
+  let endingPosition = 0
   while( i < str.length){
     if(str[i] == " " || i == str.length - 1){
-      if(maxLength < (i - pointer)){
-       startPosSave = pointer
-       endPosSave = i
-       maxLength = (i - pointer)
+      if(maxLength < (i - indicator)){
+       startingPossition = indicator
+       endingPosition = i
+       maxLength = (i - indicator)
       }
-      pointer = i+1
+      indicator = i + 1
     }
      
     i++
   }
-  console.log(startPosSave, endPosSave)
-  return str.slice(startPosSave, endPosSave)
+  console.log(startingPossition, endingPosition)
+  return str.slice(startingPossition, endingPosition)
   
 
 }
