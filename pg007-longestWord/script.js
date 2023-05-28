@@ -1,4 +1,4 @@
-let stringInput = "   Hello world of programming a there   is there the    answeresdflksa              nksd nsnfnkasfdn   "
+let stringInput = "Hello world of programming"
 
 
 function returnLongestWord(str){
@@ -9,18 +9,20 @@ function returnLongestWord(str){
   let endingPosition = 0
   while( i < str.length){
     if(str[i] == " " || i == str.length - 1){
-      if(maxLength < (i - indicator)){
+      if(maxLength < (i - indicator))
        startingPossition = indicator
        endingPosition = i
        maxLength = (i - indicator)
       }
       indicator = i + 1
+
     }
      
     i++
   }
   console.log(startingPossition, endingPosition)
   return str.slice(startingPossition, endingPosition)
+
   
 
 }
