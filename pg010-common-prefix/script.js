@@ -1,30 +1,57 @@
-let listOfStrings = ["flower", "flow", "flight"]
+let listOfStrings = ["flow", "flo", "flow"];
 
-function returnSmallWord(list){
-  // debugger 
-  let smallestWord = ""
-  for(let i = 0; i < list.length; i++){
-    if(list[i].length < list[i + 1].length){
-     smallestWord += list[i]
-      longestCommonPrefix(smallestWord, list)
-    }
-  }
-}
+// console.log(smalllest(listOfStrings))
 
-console.log(returnSmallWord(listOfStrings))
+// function longestCommonPrefix(arr){
+//   let prefix = ""
+//   for(let i = 0; i < arr.length; i++){
+//     for (let j = 0; j <= i; j++){
+//       if(arr[i + 1] === arr.length){
+//         i = -1
+//       if(arr[i][j] === arr[i + 1][j]){
+//         prefix += ar
+//         }
+//       }
+//     }
+//   }
+// }
 
-function longestCommonPrefix(smallestWord, list){
-  let countOfCommonLetters = 0
-  let emptyString = []
-  for (let i = 0; i < smallestWord.length; i++){
-    for(let j = 0; j < list[i].length; j++){  
-      if(smallestWord[i] === list[i][j]){
-        countOfCommonLetters += 1
-        console.log(countOfCommonLetters)
-        emptyString.push(list[i][j])
-      }
-      
-    }
-    return emptyString
-  }
-}
+// console.log(longestCommonPrefix(listOfStrings))
+
+// function returnSmallWord(list) {
+//   // debugger
+//   let smallestWordidx = 0;
+
+//   for (let i = 0; i < list.length-1; i++) {
+//     if (list[i].length < list[i + 1].length) {
+//       smallestWordidx = i
+//     }
+
+//   }
+//   list.splice(smallestWordidx,smallestWordidx);
+//   return [list, smallestWordidx]
+// }
+
+// // console.log(returnSmallWord(listOfStrings))
+
+// let idx, modifiedList
+// [modifiedList, idx] = returnSmallWord(listOfStrings)
+
+// function longestCommonPrefix(smallestWord, list) {
+
+//   let longestPrefix = "";
+
+//   for (let i = 0; i < smallestWord.length; i++) {
+//     for (let j = 0; j < list.length; j++) {
+//       if (smallestWord[i] == list[j][i]) {
+//         tempPrefix = ""
+//         longestPrefix += list[j][i];
+//         return longestPrefix;
+//       } else {
+//       }
+//     }
+//   }
+//   return longestPrefix;
+// }
+
+// console.log(longestCommonPrefix(listOfStrings[idx], modifiedList))
