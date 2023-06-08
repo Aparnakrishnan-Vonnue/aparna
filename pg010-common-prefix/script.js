@@ -54,32 +54,44 @@
                           // }
                           
                           // console.log(longestCommonPrefix(listOfStrings[idx], modifiedList))
-    let listOfStrings = ["flower", "flow", "flight"];
+    // let listOfStrings = ["flower", "flow", "flight", "flo"];
+
+    let listOfStrings = ["apple", "app", "application"]
 
     function longestCommonPrefix(list){
       let i = 0;
       let smallestOfList = list[0]
-      let prefix = ""
+      let tempStorageTwo = ""
+      let commonPrefix = ""
       while(i < list.length - 1){
           if(list[i].length < list[i + 1].length){
             smallestOfList = list[i]
           }
           i++
         }
-        debugger
+        // console.log(smallestOfList)
+        // debugger
         let tempStorageOne = ""
         for(let j = 0; j < list.length; j++){
+          tempStorageTwo = tempStorageOne
+          // console.log(tempStorageTwo)
+          tempStorageOne = ""
           for (let k = 0; k < smallestOfList.length; k++){
             if(smallestOfList === list[j]){
+              list[list.length - 1] = smallestOfList
+              
               continue;
             }else {
               if(smallestOfList[k] === list[j][k]){
                 tempStorageOne += smallestOfList[k]
+                if(tempStorageOne[k] === tempStorageTwo[k]){
+                  commonPrefix += tempStorageOne[k]
+                }
               }
             }
-            
           }
         }
+        return commonPrefix
     }
 
     console.log(longestCommonPrefix(listOfStrings))
