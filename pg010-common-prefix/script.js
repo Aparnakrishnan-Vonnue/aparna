@@ -54,44 +54,40 @@
                           // }
                           
                           // console.log(longestCommonPrefix(listOfStrings[idx], modifiedList))
-    // let listOfStrings = ["flower", "flow", "flight", "flo"];
+    let listOfStrings = ["flower", "flow", "flight", "f" ];
 
-    let listOfStrings = ["apple", "app", "application"]
+    // let listOfStrings = ["apple", "app", "application"]
 
     function longestCommonPrefix(list){
       let i = 0;
       let smallestOfList = list[0]
-      let tempStorageTwo = ""
-      let commonPrefix = ""
+     
       while(i < list.length - 1){
           if(list[i].length < list[i + 1].length){
             smallestOfList = list[i]
           }
           i++
         }
-        // console.log(smallestOfList)
-        // debugger
+        
         let tempStorageOne = ""
+        let tempStorageTwo = smallestOfList
         for(let j = 0; j < list.length; j++){
-          tempStorageTwo = tempStorageOne
-          // console.log(tempStorageTwo)
+          let word = list[j]
+          if(word === smallestOfList ){
+            continue;
+          }
           tempStorageOne = ""
           for (let k = 0; k < smallestOfList.length; k++){
-            if(smallestOfList === list[j]){
-              list[list.length - 1] = smallestOfList
-              
-              continue;
-            }else {
-              if(smallestOfList[k] === list[j][k]){
-                tempStorageOne += smallestOfList[k]
-                if(tempStorageOne[k] === tempStorageTwo[k]){
-                  commonPrefix += tempStorageOne[k]
-                }
-              }
+            if(word[k] === smallestOfList[k]){
+              tempStorageOne += word[k]
+            }     
+            if(tempStorageOne.length < tempStorageTwo.length){
+              tempStorageTwo = tempStorageOne
             }
-          }
         }
-        return commonPrefix
+        
+        }
+        return tempStorageTwo
     }
 
     console.log(longestCommonPrefix(listOfStrings))
