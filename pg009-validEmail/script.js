@@ -3,7 +3,7 @@ let letters = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", 
 
 function validateEmail(){
  for(let i = 0; i < domains.length; i++){
-  console.log(domains)
+
  }
 }
 
