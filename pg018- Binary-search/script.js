@@ -20,7 +20,7 @@ function sort_array_of_numbers(array_of_numbers) {
 
 console.log("total_array: ", sort_array_of_numbers(array_of_numbers));
 
-function binary_search(array_of_numbers) {
+function binary_search() {
   let sub_array = [];
 
   mid_point = Math.floor(array_of_numbers.length / 2);
@@ -37,12 +37,16 @@ function binary_search(array_of_numbers) {
     sub_array.push(array_of_numbers[mid_point]);
   }
 
-  // console.log(search_number(sub_array))
-  return sub_array;
-}
+  mid_point = Math.floor(sub_array.length / 2)
 
-// function search_number() {
-//   mid_point= Math.floor(sub_array.length / 2)
-//   array_of_numbers = sub_array
-//   // binary_search(sub_array)
-// }
+  if(sub_array.length > 1){
+    for(let m = 0; m < sub_array.length; m++){
+      if(sub_array[mid_point] < number_to_be_found) {
+        for(let n = mid_point; n < sub_array.length; n++){
+  
+        }
+      }    
+    }
+  }
+  return sub_array
+}
