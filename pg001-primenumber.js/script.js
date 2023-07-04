@@ -1,8 +1,12 @@
-let numberToCheck = 29;
-function checkWhetherPrime(number) {
+
+function isPrime(number) {
+  //identify if the number is a float
   if (number === 1) {
     return `${number} is neither prime nor composite`;
   }
+
+  if(number < 1)return false
+
   let i = 2;
   while (i < number) {
     if (number % i === 0) {
@@ -16,4 +20,4 @@ function checkWhetherPrime(number) {
 
 }
 
-console.log(checkWhetherPrime(numberToCheck));
+console.log(isPrime(2));
