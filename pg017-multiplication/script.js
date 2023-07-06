@@ -1,13 +1,14 @@
-const numberOne = [2, 6, 8, 5];
-const numberTwo = [1, 5, 2, 3];
+const numberOne = [2, 6];
+const numberTwo = [1, 5];
 
+let tempStorage = "";
 const product = () => {
+
   let firstProduct = [];
   let newArray = [];
   let firstNum = "";
-  let tempStorage = "";
   let manageProducts = [];
-  debugger
+  
   let i = numberTwo.length - 1;
   while(i >= 0){
     newArray=[]
@@ -35,7 +36,7 @@ const product = () => {
 console.log(product());
 
 function resultedfirstProduct(newArray, i, firstProduct){
-  debugger
+
   for (let k = 0; k < newArray.length; k++) {
     if (newArray[k].length === 2) {
       if (i > -1) {
