@@ -14,4 +14,3 @@ function returnListOfEvenNum(array){
 
 console.log(returnListOfEvenNum(listOfIntegersOne))
 console.log(returnListOfEvenNum(listOfIntegersTwo))
-console.log(returnListOfEvenNum(listOfIntegersThree))
