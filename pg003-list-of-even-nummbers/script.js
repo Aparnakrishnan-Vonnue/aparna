@@ -17,7 +17,10 @@ console.log(returnListOfEvenNum(listOfIntegersOne))
 console.log(returnListOfEvenNum(listOfIntegersTwo))
 
 
-
+const testCases = [{
+  list: [1, 2, 3, 4, 5],
+  expected: [2, 4]
+}]
 function testListOfEvenNum(){
   
 }
