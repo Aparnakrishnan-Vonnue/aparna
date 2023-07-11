@@ -31,6 +31,3 @@ const test_list_of_even_num = (tcases) => {
     
   })
 }
-
-test_list_of_even_num(testCases)
-
