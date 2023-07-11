@@ -1,5 +1,5 @@
 
-function listOfEvenNum(array){
+function ListOfEvenNum(array){
   let listOfEvenNums = []
   for(let i = 0; i < array.length; i++){
     if(array[i] % 2 === 0){
@@ -8,6 +8,7 @@ function listOfEvenNum(array){
   }
   return listOfEvenNums
 }
+
 
 
 const testCases = [
@@ -30,4 +31,12 @@ const test_list_of_even_num = (tcases) => {
     let resultArray = listOfEvenNum(tcase.list)
     
   })
-}
+
+console.log(returnListOfEvenNum(listOfIntegersOne))
+console.log(returnListOfEvenNum(listOfIntegersTwo))
+
+
+const testCases = [{
+  list: [1, 2, 3, 4, 5],
+  expected: [2, 4]
+}]
