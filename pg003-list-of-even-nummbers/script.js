@@ -25,9 +25,3 @@ const testCases = [
   }
 ]
 
-const test_list_of_even_num = (tcases) => {
-  tcases.forEach((tcase, i) => {
-    let resultArray = listOfEvenNum(tcase.list)
-    
-  })
-}
