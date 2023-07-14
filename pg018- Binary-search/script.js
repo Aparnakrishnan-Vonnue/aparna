@@ -16,7 +16,7 @@ function sort_array_of_numbers(array_of_numbers) {
 
 function binary_search(array, number) {
  
-
+  let sub_array = []
   let mid_point = Math.floor(array.length / 2);
   let i = mid_point
   if (number === array[mid_point]) {
@@ -25,15 +25,21 @@ function binary_search(array, number) {
   if (number > array[mid_point]) {
     while (i < array.length) {
       i++;
-      if (array[i] === number) {
-        return true;
+      if(array.length - mid_point > 1){
+        sub_array.push(array[i - 1])
       }
     }
+    array = sub_array
+    mid_point = Math.floor(array.length / 2)
+    if (number === array[mid_point]) {
+      return true;
+    }
+    
   }else {
     while(i < array.length){
       i--
       if(array[i] === number){
-        return true
+        
       }
     }
   }
