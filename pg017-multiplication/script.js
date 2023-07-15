@@ -1,7 +1,6 @@
-const numberOne = [2, 6];
-const numberTwo = [1, 5];
+numberOne = [1, 5]
+numberTwo = [2, 4]
 
-let tempStorage = "";
 const product = () => {
 
   let firstProduct = [];
@@ -15,19 +14,13 @@ const product = () => {
     firstProduct=[]
     firstNum = ""
     for (let j = numberOne.length - 1; j >= 0; j--) {
-      let individulaProduct = (numberTwo[i] * numberOne[j]).toLocaleString();
+      let individulaProduct = (numberTwo[i] * numberOne[j]).toString();
       newArray.push(individulaProduct);
     }
-    j = i;
 
+    j = i
+    console.log(newArray)
     resultedfirstProduct(newArray, i, firstProduct)
-
-    for (let n = firstProduct.length - 1; n >= 0; n--) {
-      firstNum += firstProduct[n];
-      console.log(firstNum);
-    }
-    manageProducts.push(Number(firstNum));
-    console.log(manageProducts);
     i--
   }
 
@@ -53,7 +46,7 @@ function resultedfirstProduct(newArray, i, firstProduct){
       firstProduct.push(newArray[k]);
     }
   }
-  i = numberTwo.length
+  i = numberTwo.length - 1
   j = numberTwo.length - 1
 }
 
@@ -62,3 +55,4 @@ function resultedfirstProduct(newArray, i, firstProduct){
 // console.log(2685 * 1523)
 
 //Expected output = 4, 089, 255
+
