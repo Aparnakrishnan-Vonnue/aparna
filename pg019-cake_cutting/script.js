@@ -86,37 +86,41 @@ const list_of_holidays = [
   "12-10-2023",
   "12-17-2023",
   "12-24-2023",
-  "12-31-2021",
+  "12-31-2023",
 ];
+
+
 
 const list_of_birthdays = [
-  "03-28-2023",
-  "11-21-2023",
-  "12-05-2023",
-  "03-05-2023",
-  "12-29-2023",
-  "01-31-2023",
-  "07-16-2023",
-];
-
-const day_names = [
-  "Sunday",
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursday",
-  "Friday",
-  "Saturday",
+  "03-28-1998",
+  "11-21-1999",
+  "12-05-1994",
+  "03-05-1976",
+  "12-29-1962",
+  "01-31-2000",
+  "07-16-2002",
 ];
 
 const day_to_celebrate = (holidays, bdays) => {
+
   for (let i = 0; i < bdays.length; i++) {
     for (let j = 0; j < holidays.length; j++) {
       {
+    
         const date_of_holiday = new Date(holidays[j]);
-        const date_of_bday = new Date(bdays[i])
-        const day = day_names[date_of_holiday.getDay()];
-        const day_to_cut_cake = ""
+        let date_of_bday = new Date(bdays[i])
+        let date_to_celebrate = "";
+        let saturdays = []
+        if(date_of_bday.getDay() !== 6){
+          let days_to_be_postponed = 6 - date_of_bday.getDay()
+          let month = date_of_bday.getMonth() + 1
+          if(month === 1 || month === 3 || month === 5 || month === 7 || month === 8 || month === 10 || month === 12){
+            
+          }
+
+          date_to_celebrate = new Date(date_of_bday.getDate()+days_to_be_postponed , date_of_bday.getMonth()) 
+          // console.log(date_of_bday.getDate()+days_to_be_postponed)
+        }
         
       }
     }
@@ -124,3 +128,32 @@ const day_to_celebrate = (holidays, bdays) => {
 };
 
 day_to_celebrate(list_of_holidays, list_of_birthdays);
+
+
+
+function postponeDates(startDate, numberOfDays) {
+  let postponedDates = [];
+  let currentDate = new Date(startDate);
+  
+
+  for (var i = 0; i < numberOfDays; i++) {
+    currentDate.setDate(currentDate.getDate() + 1);
+    postponedDates.push(new Date(currentDate));
+  }
+
+  return postponedDates;
+}
+
+
+postponeDates("03-28-1998", 31)
+
+function convertToCurrentYear(oldYear) {
+  let currentDate = new Date();
+  let currentYear = currentDate.getFullYear();
+  let difference = currentYear - oldYear;
+  let currentYearNew = oldYear + difference;
+
+  return currentYearNew;
+}
+
+console.log(convertToCurrentYear(1998))
