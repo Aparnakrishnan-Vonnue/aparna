@@ -94,6 +94,7 @@ const list_of_holidays = [
 const list_of_birthdays = [
   "01-12-1999",
   "03-28-1998",
+  "12-22-1995",
   "04-01-1998",
   "12-05-1994",
   "03-05-1976",
@@ -104,12 +105,15 @@ const list_of_birthdays = [
 
 //The given dates are in mm-dd-yyyy format
 
-const day_to_celebrate = (holidays, bdays) => {
+const day_to_celebrate = (bdays) => {
+  
   for (let i = 0; i < bdays.length; i++) {
     let date_of_bday = new Date(bdays[i]);
+
     const current_year_equivalent = convert_to_current_year(
       date_of_bday.getFullYear()
     );
+
     let current_bday = new Date(
       current_year_equivalent,
       date_of_bday.getMonth(),
@@ -125,19 +129,25 @@ const day_to_celebrate = (holidays, bdays) => {
 };
 }
 
-day_to_celebrate(list_of_holidays, list_of_birthdays);
+day_to_celebrate(list_of_birthdays);
 
 function postpone_date(current_bday, number_of_days) {
+  
   let postponed_dates = [];
-  let current_date = new Date(current_bday);
  
   for (let i = 0; i < number_of_days; i++) {
-    current_date.setDate(current_date.getDate() + 1);
-    postponed_dates.push(new Date(current_date));
+
+    current_bday.setDate(current_bday.getDate() + 1);
+
+    postponed_dates.push(new Date(current_bday));
+
     if (postponed_dates[i].getDay() === 6) {
       for (let k = 0; k < list_of_holidays.length; k++) {
+
         let date_of_holiday = new Date(list_of_holidays[k]);
+
         if (postponed_dates[i].getTime() !== date_of_holiday.getTime()) {
+
           if (date_of_holiday.getTime() > postponed_dates[i].getTime()) {
             return `${postponed_dates[i]} is apt for cake cutting for bdays on ${current_bday}`;
           }
