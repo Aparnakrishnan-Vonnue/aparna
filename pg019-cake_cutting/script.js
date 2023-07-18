@@ -87,13 +87,15 @@ const list_of_holidays = [
   "12-17-2023",
   "12-24-2023",
   "12-31-2023",
+  "01-13-2024",
 ];
 
 
-
 const list_of_birthdays = [
+  "01-12-1999",
   "03-28-1998",
-  "11-21-1999",
+  "12-22-1995",
+  "04-01-1998",
   "12-05-1994",
   "03-05-1976",
   "12-29-1962",
@@ -101,59 +103,69 @@ const list_of_birthdays = [
   "07-16-2002",
 ];
 
-const day_to_celebrate = (holidays, bdays) => {
+//The given dates are in mm-dd-yyyy format
 
+const day_to_celebrate = (bdays) => {
+  
   for (let i = 0; i < bdays.length; i++) {
-    for (let j = 0; j < holidays.length; j++) {
-      {
-    
-        const date_of_holiday = new Date(holidays[j]);
-        let date_of_bday = new Date(bdays[i])
-        let date_to_celebrate = "";
-        let saturdays = []
-        if(date_of_bday.getDay() !== 6){
-          let days_to_be_postponed = 6 - date_of_bday.getDay()
-          let month = date_of_bday.getMonth() + 1
-          if(month === 1 || month === 3 || month === 5 || month === 7 || month === 8 || month === 10 || month === 12){
-            
-          }
+    let date_of_bday = new Date(bdays[i]);
 
-          date_to_celebrate = new Date(date_of_bday.getDate()+days_to_be_postponed , date_of_bday.getMonth()) 
-          // console.log(date_of_bday.getDate()+days_to_be_postponed)
+    const current_year_equivalent = convert_to_current_year(
+      date_of_bday.getFullYear()
+    );
+
+    let current_bday = new Date(
+      current_year_equivalent,
+      date_of_bday.getMonth(),
+      date_of_bday.getDate()
+    );
+
+    if (current_bday.getDay() !== 6) {
+      console.log(postpone_date(current_bday, 365));
+    }   
+    else {
+      console.log (`${current_bday} is apt for cake cutting for bdays on ${current_bday}`)
+    }
+};
+}
+
+day_to_celebrate(list_of_birthdays);
+
+function postpone_date(current_bday, number_of_days) {
+  
+  let postponed_dates = [];
+ 
+  for (let i = 0; i < number_of_days; i++) {
+
+    current_bday.setDate(current_bday.getDate() + 1);
+
+    postponed_dates.push(new Date(current_bday));
+
+    if (postponed_dates[i].getDay() === 6) {
+      for (let k = 0; k < list_of_holidays.length; k++) {
+
+        let date_of_holiday = new Date(list_of_holidays[k]);
+
+        if (postponed_dates[i].getTime() !== date_of_holiday.getTime()) {
+
+          if (date_of_holiday.getTime() > postponed_dates[i].getTime()) {
+            return `${postponed_dates[i]} is apt for cake cutting for bdays on ${current_bday}`;
+          }
+          continue;
+        } else {
+          break;
         }
-        
       }
     }
   }
-};
 
-day_to_celebrate(list_of_holidays, list_of_birthdays);
-
-
-
-function postponeDates(startDate, numberOfDays) {
-  let postponedDates = [];
-  let currentDate = new Date(startDate);
-  
-
-  for (var i = 0; i < numberOfDays; i++) {
-    currentDate.setDate(currentDate.getDate() + 1);
-    postponedDates.push(new Date(currentDate));
-  }
-
-  return postponedDates;
 }
 
+function convert_to_current_year(old_year) {
+  let current_date = new Date();
+  let current_year = current_date.getFullYear();
+  let difference = current_year - old_year;
+  let current_year_new = old_year + difference;
 
-postponeDates("03-28-1998", 31)
-
-function convertToCurrentYear(oldYear) {
-  let currentDate = new Date();
-  let currentYear = currentDate.getFullYear();
-  let difference = currentYear - oldYear;
-  let currentYearNew = oldYear + difference;
-
-  return currentYearNew;
+  return current_year_new;
 }
-
-console.log(convertToCurrentYear(1998))
