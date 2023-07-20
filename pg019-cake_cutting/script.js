@@ -113,7 +113,8 @@ const list_of_birthdays = [
   "12-29-1962",
   "01-31-2000",
   "07-16-2002",
-  "07-18-2002"
+  "07-18-2002",
+  "12-01-1992"
 ];
 
 
@@ -137,7 +138,7 @@ const day_to_celebrate = (bdays) => {
     } 
     else {
       console.log(
-        `${current_bday} is apt for cake cutting for bdays on ${current_bday}`
+        `${current_bday} is appropriate  for cake cutting for bdays on ${current_bday}`
       );
     }
   }
@@ -148,7 +149,7 @@ day_to_celebrate(list_of_birthdays);
 function postpone_date(current_bday, number_of_days) {
   let postponed_dates = [];
   let current_date = new Date(current_bday);
-  let sorted_list_of_holidays = list_of_holidays.sort(dateComparison);
+  let sorted_list_of_holidays = list_of_holidays.sort(date_comparison);
 
   for (let i = 0; i < number_of_days; i++) {
     current_date.setDate(current_date.getDate() + 1);
@@ -163,7 +164,7 @@ function postpone_date(current_bday, number_of_days) {
         let date_of_holiday = new Date(sorted_list_of_holidays[k]);
         if (postponed_dates[i].getTime() !== date_of_holiday.getTime()) {
           if (date_of_holiday.getTime() > postponed_dates[i].getTime()) {
-            return `${postponed_dates[i]} is apt for cake cutting for bdays on ${current_bday}`;
+            return `${postponed_dates[i]} is appropriate  for cake cutting for bdays on ${current_bday}`;
           }
           continue;
         } 
@@ -185,11 +186,11 @@ function convert_to_current_year(old_year) {
   return current_year_new;
 }
 
-function dateComparison(a, b) {
-  const date1 = new Date(a)
-  const date2 = new Date(b)
+function date_comparison(a, b) {
+  const date_1 = new Date(a)
+  const date_2 = new Date(b)
   
-  return date1 - date2;
+  return date_1 - date_2;
 }
 
 
