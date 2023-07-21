@@ -124,7 +124,7 @@ function binary_search(array_of_numbers, number_to_be_found){
 }
 
 //TestCase for Binary Search
-const testCases = [
+const test_cases = [
  {
   array_of_numbers: [10, 20, 30, 40, 50],
   number_to_be_found: 40,
@@ -154,8 +154,7 @@ const testCases = [
 ]
 
 function test_binary_search(){
-  // debugger
-  testCases.forEach((tcase, idx) => {
+  test_cases.forEach((tcase, idx) => {
     if(tcase.expected_result === binary_search(tcase.array_of_numbers, tcase.number_to_be_found)){
       console.log (`Testcase for ${idx} passed`)
     }
