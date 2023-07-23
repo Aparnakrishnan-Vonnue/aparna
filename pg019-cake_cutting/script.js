@@ -155,7 +155,7 @@ function postpone_date(current_bday, number_of_days) {
     current_date.setDate(current_date.getDate() + 1);
 
     postponed_dates.push(new Date(current_date));
-    
+    console.log(postponed_dates)
 
     if (postponed_dates[i].getDay() === 6) {
 
