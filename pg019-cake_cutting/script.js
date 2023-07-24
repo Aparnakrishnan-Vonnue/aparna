@@ -120,6 +120,7 @@ const list_of_birthdays = [
 
 
 const day_to_celebrate = (bdays) => {
+  debugger
   for (let i = 0; i < bdays.length; i++) {
     let date_of_bday = new Date(bdays[i]);
 
@@ -147,6 +148,7 @@ const day_to_celebrate = (bdays) => {
 day_to_celebrate(list_of_birthdays);
 
 function postpone_date(current_bday, number_of_days) {
+  debugger
   let postponed_dates = [];
   let current_date = new Date(current_bday);
   let sorted_list_of_holidays = list_of_holidays.sort(date_comparison);
@@ -163,12 +165,15 @@ function postpone_date(current_bday, number_of_days) {
         
         let date_of_holiday = new Date(sorted_list_of_holidays[k]);
         if (postponed_dates[i].getTime() !== date_of_holiday.getTime()) {
-          if (date_of_holiday.getTime() > postponed_dates[i].getTime()) {
+          if (date_of_holiday.getTime() > postponed_dates[i].getTime()) { //&& postponed_dates[i] !== holiday
             return `${postponed_dates[i]} is appropriate  for cake cutting for bdays on ${current_bday}`;
-          }
+          } //else if(date_of_holiday.getTime() > postponed_dates[i].getTime() && postponed_dates[i] === holiday)
           continue;
         } 
         else {
+          // if(new Date((postponed_dates[i].getTime() - 1 )) === new Date(date_of_holiday.getTime() - 1)){
+          //   return `${new Date(postponed_dates[i] - 1 )} is appropriate`
+          // }
           break;
         }
         
