@@ -85,7 +85,6 @@ function sort_array(array) {
 }
 
 function binary_search(array_of_numbers, number_to_be_found){
-  
   let sub_array = []
   let length_of_main_array = array_of_numbers.length
  
