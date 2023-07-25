@@ -99,28 +99,29 @@ const list_of_holidays = [
   "05-10-2023",
   "05-11-2023",
   "05-12-2023",
+  "05-13-2023"
 ];
 
 const list_of_birthdays = [
-  "02-26-1994",
-  "05-01-2023",
-  "01-12-1999",
-  "03-28-1998",
-  "12-22-1995",
-  "04-01-1998",
-  "12-05-1994",
-  "03-05-1976",
-  "12-29-1962",
-  "01-31-2000",
-  "07-16-2002",
-  "07-18-2002",
-  "12-01-1992"
+  "05-13-2023",
+  // "02-26-1994",
+  // "01-12-1999",
+  // "03-28-1998",
+  // "12-22-1995",
+  // "04-01-1998",
+  // "12-05-1994",
+  // "03-05-1976",
+  // "12-29-1962",
+  // "01-31-2000",
+  // "07-16-2002",
+  // "07-18-2002",
+  // "12-01-1992"
 ];
 
 
 
 const day_to_celebrate = (bdays) => {
-  debugger
+
   for (let i = 0; i < bdays.length; i++) {
     let date_of_bday = new Date(bdays[i]);
 
@@ -138,9 +139,7 @@ const day_to_celebrate = (bdays) => {
       console.log(postpone_date(current_bday, 365));
     } 
     else {
-      console.log(
-        `${current_bday} is appropriate  for cake cutting for bdays on ${current_bday}`
-      );
+      
     }
   }
 };
@@ -148,7 +147,7 @@ const day_to_celebrate = (bdays) => {
 day_to_celebrate(list_of_birthdays);
 
 function postpone_date(current_bday, number_of_days) {
-  debugger
+
   let postponed_dates = [];
   let current_date = new Date(current_bday);
   let sorted_list_of_holidays = list_of_holidays.sort(date_comparison);
@@ -157,7 +156,6 @@ function postpone_date(current_bday, number_of_days) {
     current_date.setDate(current_date.getDate() + 1);
 
     postponed_dates.push(new Date(current_date));
-    console.log(postponed_dates)
 
     if (postponed_dates[i].getDay() === 6) {
 
@@ -165,15 +163,12 @@ function postpone_date(current_bday, number_of_days) {
         
         let date_of_holiday = new Date(sorted_list_of_holidays[k]);
         if (postponed_dates[i].getTime() !== date_of_holiday.getTime()) {
-          if (date_of_holiday.getTime() > postponed_dates[i].getTime()) { //&& postponed_dates[i] !== holiday
+          if (date_of_holiday.getTime() > postponed_dates[i].getTime()) { 
             return `${postponed_dates[i]} is appropriate  for cake cutting for bdays on ${current_bday}`;
-          } //else if(date_of_holiday.getTime() > postponed_dates[i].getTime() && postponed_dates[i] === holiday)
+          } 
           continue;
         } 
         else {
-          // if(new Date((postponed_dates[i].getTime() - 1 )) === new Date(date_of_holiday.getTime() - 1)){
-          //   return `${new Date(postponed_dates[i] - 1 )} is appropriate`
-          // }
           break;
         }
         
