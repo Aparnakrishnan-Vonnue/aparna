@@ -99,9 +99,18 @@ const subjectNames = (obj, name) => {
   let studentDetails = obj.students;
   let arrayOfSubjects = [];
   for (let i = 0; i < studentDetails.length; i++) {
-    let marks = studentDetails[i].marks;
-    for (let j = 0; j < marks.length; j++) {}
+    for (let j = 0; j < name.length; j++) {
+      if (name[j] === studentDetails[i].name) {
+        let subjectDetails = studentDetails[i].marks;
+        for (let k = 0; k < subjectDetails.length; k++) {
+          arrayOfSubjects.push(subjectDetails[k].subject);
+        }
+      } else {
+        continue;
+      }
+    }
   }
+  return `subjects for ${name}: ${arrayOfSubjects}`;
 };
 
 console.log(subjectNames(classObj, nameOfAllStudents(classObj)));
