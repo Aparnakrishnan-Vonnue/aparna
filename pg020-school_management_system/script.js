@@ -97,20 +97,18 @@ console.log(studentIDs(classObj));
 
 const subjectNames = (obj, name) => {
   let studentDetails = obj.students;
-  let arrayOfSubjects = [];
-  for (let i = 0; i < studentDetails.length; i++) {
-    for (let j = 0; j < name.length; j++) {
-      if (name[j] === studentDetails[i].name) {
-        let subjectDetails = studentDetails[i].marks;
-        for (let k = 0; k < subjectDetails.length; k++) {
-          arrayOfSubjects.push(subjectDetails[k].subject);
-        }
-      } else {
-        continue;
-      }
-    }
+  let arr = [];
+  for (let i = 0; i < name.length; i++) {
+    const filteredDetails = studentDetails.filter(
+      (student) => name[i] === student.name
+    );
+    filteredDetails.forEach((details) => {
+      let academicDetails = details.marks;
+      academicDetails.forEach((academic) => {
+        console.log(academic);
+      });
+    });
   }
-  return `subjects for ${name}: ${arrayOfSubjects}`;
 };
 
 console.log(subjectNames(classObj, nameOfAllStudents(classObj)));
