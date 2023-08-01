@@ -216,23 +216,24 @@ const Qno10 = subjectBasedTotalOfAllStudents(classObj, "English");
 const studentWithHighestMark = (obj: ClassObj, subject: string) => {
   const studentDetails = obj.students;
   let arrayOfMarks: number[] = [];
-  let subjectTopperDetails: string[] = [];
-  for (let i = 0; i < studentDetails.length; i++) {
-    let academicDetails = studentDetails[i].marks;
-    const markOfIndividualSubject = academicDetails.filter(
-      (sub) => subject === sub.subject
-    );
+  let subjectTopper: { name: string; mark: number } = { name: "", mark: 0 };
 
-    markOfIndividualSubject.forEach((mark) => {
+  studentDetails.forEach((student) => {
+    let academicDetails = student.marks;
+    let highestMark = academicDetails[0].mark;
+    let specificSubjectPerformance = academicDetails.filter(
+      (specificsub) => specificsub.subject === subject
+    );
+    specificSubjectPerformance.forEach((mark) => {
       arrayOfMarks.push(mark.mark);
+
+      arrayOfMarks.forEach((mark) => {
+        if (mark > highestMark) {
+          highestMark = mark;
+        }
+      });
     });
-    let highestMark = arrayOfMarks[0];
-    arrayOfMarks.forEach((mark, idx) => {
-      if (arrayOfMarks[idx] > highestMark) {
-        highestMark = arrayOfMarks[idx];
-      }
-    });
-  }
+  });
 };
 
 const Qno11 = studentWithHighestMark(classObj, "English");
