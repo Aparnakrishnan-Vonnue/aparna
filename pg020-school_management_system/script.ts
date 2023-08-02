@@ -219,6 +219,7 @@ const studentWithHighestMark = (obj: ClassObj, subject: string) => {
   let subjectTopper: { name: string; mark: number } = { name: "", mark: 0 };
 
   studentDetails.forEach((student) => {
+    subjectTopper.name = student.name;
     let academicDetails = student.marks;
     let highestMark = academicDetails[0].mark;
     let specificSubjectPerformance = academicDetails.filter(
@@ -226,6 +227,7 @@ const studentWithHighestMark = (obj: ClassObj, subject: string) => {
     );
     specificSubjectPerformance.forEach((mark) => {
       arrayOfMarks.push(mark.mark);
+      console.log(mark);
 
       arrayOfMarks.forEach((mark) => {
         if (mark > highestMark) {
@@ -233,10 +235,12 @@ const studentWithHighestMark = (obj: ClassObj, subject: string) => {
         }
       });
     });
+    subjectTopper.mark = highestMark;
   });
+  return subjectTopper;
 };
 
-const Qno11 = studentWithHighestMark(classObj, "English");
+const Qno11 = studentWithHighestMark(classObj, "Maths");
 
 //=========================================================================
 
@@ -249,9 +253,7 @@ function filterStudentDetails(obj: ClassObj, name: string): StudentDetails[] {
   return academicDetails;
 }
 
-const whichQuestionToBeExecuted = (
-  question: string | number | string[] | void
-) => {
+const whichQuestionToBeExecuted = (question: any) => {
   switch (question) {
     case Qno1:
       console.log(Qno1);
