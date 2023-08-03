@@ -227,7 +227,6 @@ const studentWithHighestMark = (obj: ClassObj, subject: string) => {
     );
     specificSubjectPerformance.forEach((mark) => {
       arrayOfMarks.push(mark.mark);
-      console.log(mark);
 
       arrayOfMarks.forEach((mark) => {
         if (mark > highestMark) {
@@ -240,7 +239,7 @@ const studentWithHighestMark = (obj: ClassObj, subject: string) => {
   return subjectTopper;
 };
 
-const Qno11 = studentWithHighestMark(classObj, "Maths");
+const Qno11 = studentWithHighestMark(classObj, "Chemistry");
 
 //=========================================================================
 
