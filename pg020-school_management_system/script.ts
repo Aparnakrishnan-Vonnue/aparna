@@ -31,7 +31,7 @@ const classObj: ClassObj = {
       id: "103",
       marks: [
         { subject: "English", mark: 12 },
-        { subject: "Maths", mark: 49 },
+        { subject: "Maths", mark: 9 },
         { subject: "Physics", mark: 18 },
         { subject: "Chemistry", mark: 30 },
         { subject: "Computer", mark: 40 },
@@ -42,7 +42,7 @@ const classObj: ClassObj = {
       id: "104",
       marks: [
         { subject: "English", mark: 49 },
-        { subject: "Maths", mark: 49 },
+        { subject: "Maths", mark: 9 },
         { subject: "Physics", mark: 47 },
         { subject: "Chemistry", mark: 46 },
         { subject: "Computer", mark: 50 },
@@ -211,35 +211,45 @@ const subjectBasedTotalOfAllStudents = (obj: ClassObj, subject: string) => {
 };
 
 const Qno10 = subjectBasedTotalOfAllStudents(classObj, "English");
+type SubjectMark = {
+  subject: string;
+  mark: number;
+};
 
 //11. Write a function to find and print the student with the highest marks in a specific subject.
 const studentWithHighestMark = (obj: ClassObj, subject: string) => {
   const studentDetails = obj.students;
-  let arrayOfMarks: number[] = [];
+  let specificSubjectPerformance: SubjectMark[] = [];
   let subjectTopper: { name: string; mark: number } = { name: "", mark: 0 };
 
   studentDetails.forEach((student) => {
-    subjectTopper.name = student.name;
     let academicDetails = student.marks;
-    let highestMark = academicDetails[0].mark;
-    let specificSubjectPerformance = academicDetails.filter(
-      (specificsub) => specificsub.subject === subject
+    specificSubjectPerformance.push(
+      ...academicDetails.filter(
+        (specificsub) => specificsub.subject === subject
+      )
     );
-    specificSubjectPerformance.forEach((mark) => {
-      arrayOfMarks.push(mark.mark);
-
-      arrayOfMarks.forEach((mark) => {
-        if (mark > highestMark) {
-          highestMark = mark;
-        }
-      });
-    });
-    subjectTopper.mark = highestMark;
+  });
+  // console.log(specificSubjectPerformance);
+  let highestMark = 0;
+  specificSubjectPerformance.forEach((performance: SubjectMark) => {
+    if (performance.mark > highestMark) {
+      highestMark = performance.mark;
+    }
+  });
+  // console.log(studentDetails);
+  studentDetails.forEach((student) => {
+    let academicDetails = student.marks;
+    const marksForEachStudent = academicDetails.filter(
+      (mark) => mark.mark === highestMark
+    );
+    subjectTopper.name = student.name;
+    console.log(marksForEachStudent);
   });
   return subjectTopper;
 };
 
-const Qno11 = studentWithHighestMark(classObj, "Chemistry");
+const Qno11 = studentWithHighestMark(classObj, "Maths");
 
 //=========================================================================
 
