@@ -1,4 +1,4 @@
-import { ClassObj, StudentDetails } from "./type";
+import { ClassObj, Marks, StudentDetails } from "./type";
 
 const classObj: ClassObj = {
   name: "class A",
@@ -12,7 +12,7 @@ const classObj: ClassObj = {
         { subject: "Maths", mark: 48 },
         { subject: "Physics", mark: 40 },
         { subject: "Chemistry", mark: 30 },
-        { subject: "Computer", mark: 20 },
+        { subject: "Computer", mark: 60 },
       ],
     },
     {
@@ -23,7 +23,7 @@ const classObj: ClassObj = {
         { subject: "Maths", mark: 38 },
         { subject: "Physics", mark: 33 },
         { subject: "Chemistry", mark: 34 },
-        { subject: "Computer", mark: 30 },
+        { subject: "Computer", mark: 60 },
       ],
     },
     {
@@ -51,6 +51,9 @@ const classObj: ClassObj = {
   ],
 };
 
+//global variables
+const studentDetails: StudentDetails[] = classObj.students;
+
 // 1. Write a function to print the name of the class.
 
 const nameOfTheClass = (obj: ClassObj) => {
@@ -70,10 +73,9 @@ const Qno2 = nameOfTeacher(classObj);
 // 3. Write a function to print the names of all the students in the class.
 
 const nameOfAllStudents = (obj: ClassObj) => {
-  let studentsDetails = obj.students;
   let arrayOfNames: string[] = [];
-  for (let i = 0; i < studentsDetails.length; i++) {
-    let nameofStudent: string = studentsDetails[i].name;
+  for (let i = 0; i < studentDetails.length; i++) {
+    let nameofStudent: string = studentDetails[i].name;
     arrayOfNames.push(nameofStudent);
   }
   return arrayOfNames;
@@ -84,10 +86,9 @@ const Qno3 = nameOfAllStudents(classObj);
 // 4. Write a function to print the IDs of all the students in the class
 
 const studentIDs = (obj: ClassObj) => {
-  let studentsDetails = obj.students;
   let arrayOfID: string[] = [];
-  for (let i = 0; i < studentsDetails.length; i++) {
-    let studentId: string = studentsDetails[i].id;
+  for (let i = 0; i < studentDetails.length; i++) {
+    let studentId: string = studentDetails[i].id;
     arrayOfID.push(studentId);
   }
   return arrayOfID;
@@ -98,7 +99,6 @@ const Qno4 = studentIDs(classObj);
 // 5. Write a function to print the subject names for a specific student.
 
 const subjectNames = (obj: ClassObj, name: string) => {
-  let studentDetails = obj.students;
   let subjectsArray: string[] = [];
   for (let i = 0; i < name.length; i++) {
     const filteredStudentDetails = filterStudentDetails(obj, name);
@@ -167,7 +167,6 @@ const subjectBasedAverageOfAllStudents = (obj: ClassObj, subject: string) => {
   let arrayOfMarks: number[] = [];
   let average = 0;
   let total = 0;
-  const studentDetails = obj.students;
 
   for (let i = 0; i < studentDetails.length; i++) {
     let academicDetails = studentDetails[i].marks;
@@ -192,7 +191,6 @@ const Qno9 = subjectBasedAverageOfAllStudents(classObj, "English");
 //10. Write a function to calculate and print the total marks for all students in a specific subject.
 const subjectBasedTotalOfAllStudents = (obj: ClassObj, subject: string) => {
   let totalMark = 0;
-  let studentDetails = obj.students;
   let arrayOfMarks: number[] = [];
   for (let i = 0; i < studentDetails.length; i++) {
     let academicDetails = studentDetails[i].marks;
@@ -211,45 +209,138 @@ const subjectBasedTotalOfAllStudents = (obj: ClassObj, subject: string) => {
 };
 
 const Qno10 = subjectBasedTotalOfAllStudents(classObj, "English");
+
+//11. Write a function to find and print the student with the highest marks in a specific subject.
 type SubjectMark = {
-  subject: string;
+  name: string;
   mark: number;
 };
 
-//11. Write a function to find and print the student with the highest marks in a specific subject.
 const studentWithHighestMark = (obj: ClassObj, subject: string) => {
-  const studentDetails = obj.students;
   let specificSubjectPerformance: SubjectMark[] = [];
-  let subjectTopper: { name: string; mark: number } = { name: "", mark: 0 };
+  let subjectTopper: SubjectMark[] = [];
 
   studentDetails.forEach((student) => {
-    let academicDetails = student.marks;
-    specificSubjectPerformance.push(
-      ...academicDetails.filter(
-        (specificsub) => specificsub.subject === subject
-      )
-    );
+    student.marks.forEach((item) => {
+      if (item.subject === subject) {
+        specificSubjectPerformance.push({
+          name: student.name,
+          mark: item.mark,
+        });
+      }
+    });
   });
-  // console.log(specificSubjectPerformance);
   let highestMark = 0;
-  specificSubjectPerformance.forEach((performance: SubjectMark) => {
+  specificSubjectPerformance.forEach((performance) => {
     if (performance.mark > highestMark) {
       highestMark = performance.mark;
     }
   });
-  // console.log(studentDetails);
-  studentDetails.forEach((student) => {
-    let academicDetails = student.marks;
-    const marksForEachStudent = academicDetails.filter(
-      (mark) => mark.mark === highestMark
-    );
-    subjectTopper.name = student.name;
-    console.log(marksForEachStudent);
-  });
+  subjectTopper = specificSubjectPerformance.filter(
+    (topper) => topper.mark === highestMark
+  );
   return subjectTopper;
 };
 
-const Qno11 = studentWithHighestMark(classObj, "Maths");
+const Qno11 = studentWithHighestMark(classObj, "Computer");
+
+//12.Write a function to find and print the student with the highest marks in a specific subject.
+const studentWithLowestMarkinSub = (subject: string, obj: ClassObj) => {
+  let specificSubjectPerformance: SubjectMark[] = [];
+  let studentWithLowestMark: SubjectMark[] = [];
+
+  studentDetails.forEach((student) => {
+    student.marks.forEach((subjectMark) => {
+      if (subjectMark.subject === subject) {
+        specificSubjectPerformance.push({
+          name: student.name,
+          mark: subjectMark.mark,
+        });
+      }
+    });
+  });
+  let lowestMark = specificSubjectPerformance[0].mark;
+  specificSubjectPerformance.forEach((performance) => {
+    if (performance.mark < lowestMark) {
+      lowestMark = performance.mark;
+    }
+    studentWithLowestMark = specificSubjectPerformance.filter(
+      (student) => student.mark === lowestMark
+    );
+  });
+  return studentWithLowestMark;
+};
+
+const Qno12 = console.log(studentWithLowestMarkinSub("English", classObj));
+
+//13. Write a function to find and print the student with the highest total marks.
+const studentWithHighestTotalMark = (obj: ClassObj) => {
+  let totalMarks: SubjectMark[] = [];
+  studentDetails.forEach((detail) => {
+    totalMarks.push({
+      name: detail.name,
+      mark: totalMarksOfEachStudent(classObj, detail.name),
+    });
+  });
+
+  let topScore = 0;
+  totalMarks.forEach((total) => {
+    if (total.mark > topScore) {
+      topScore = total.mark;
+    }
+  });
+  const classTopper = totalMarks.filter((student) => student.mark === topScore);
+  return classTopper;
+};
+
+const Qno13 = console.log(studentWithHighestTotalMark(classObj));
+
+//14. Write a function to find and print the student with the lowest total marks.
+const studentWithLowestTotalMark = (obj: ClassObj) => {
+  let totalMarks: SubjectMark[] = [];
+  studentDetails.forEach((detail) => {
+    totalMarks.push({
+      name: detail.name,
+      mark: totalMarksOfEachStudent(classObj, detail.name),
+    });
+  });
+  let lowestTotal = totalMarks[0].mark;
+  totalMarks.forEach((total) => {
+    if (total.mark < lowestTotal) {
+      lowestTotal = total.mark;
+    }
+  });
+  const lowScorer = totalMarks.filter(
+    (student) => student.mark === lowestTotal
+  );
+  return lowScorer;
+};
+
+const Qno14 = console.log(studentWithLowestTotalMark(classObj));
+
+//15. 14.
+//15. Write a function to find and print the subject with the highest average marks.
+type subjectAvgType = {
+  subject: string;
+  average: number;
+};
+const subjectWithHighestAvgMark = (obj: ClassObj) => {
+  let subjectAvg: subjectAvgType[] = [];
+  let academicDetails: Marks[] = [];
+  studentDetails.forEach((detail) => {
+    academicDetails = detail.marks;
+    academicDetails.forEach((subject) => {
+      subjectAvg.push({
+        subject: subject.subject,
+        average: subjectBasedAverageOfAllStudents(classObj, subject.subject),
+      });
+    });
+  });
+  subjectAvg.forEach((average) => {
+    console.log(average);
+  });
+};
+const Qno15 = console.log(subjectWithHighestAvgMark(classObj));
 
 //=========================================================================
 
@@ -296,7 +387,14 @@ const whichQuestionToBeExecuted = (question: any) => {
       break;
     case Qno11:
       console.log(Qno11);
+      break;
+    case Qno12:
+      console.log(Qno12);
+      break;
+    case Qno13:
+      console.log(Qno13);
+      break;
   }
 };
 
-whichQuestionToBeExecuted(Qno11);
+whichQuestionToBeExecuted(Qno14);
