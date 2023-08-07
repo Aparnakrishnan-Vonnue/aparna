@@ -12,7 +12,7 @@ const classObj: ClassObj = {
         { subject: "Maths", mark: 48 },
         { subject: "Physics", mark: 40 },
         { subject: "Chemistry", mark: 30 },
-        { subject: "Computer", mark: 60 },
+        { subject: "Computer", mark: 20 },
       ],
     },
     {
@@ -23,7 +23,7 @@ const classObj: ClassObj = {
         { subject: "Maths", mark: 38 },
         { subject: "Physics", mark: 33 },
         { subject: "Chemistry", mark: 34 },
-        { subject: "Computer", mark: 60 },
+        { subject: "Computer", mark: 30 },
       ],
     },
     {
@@ -31,7 +31,7 @@ const classObj: ClassObj = {
       id: "103",
       marks: [
         { subject: "English", mark: 12 },
-        { subject: "Maths", mark: 9 },
+        { subject: "Maths", mark: 49 },
         { subject: "Physics", mark: 18 },
         { subject: "Chemistry", mark: 30 },
         { subject: "Computer", mark: 40 },
@@ -42,7 +42,7 @@ const classObj: ClassObj = {
       id: "104",
       marks: [
         { subject: "English", mark: 49 },
-        { subject: "Maths", mark: 9 },
+        { subject: "Maths", mark: 49 },
         { subject: "Physics", mark: 47 },
         { subject: "Chemistry", mark: 46 },
         { subject: "Computer", mark: 50 },
@@ -60,7 +60,7 @@ const nameOfTheClass = (obj: ClassObj) => {
   return obj.name;
 };
 
-const Qno1 = nameOfTheClass(classObj);
+const one = nameOfTheClass(classObj);
 
 // 2. Write a function to print the teacher's name.
 
@@ -68,7 +68,7 @@ const nameOfTeacher = (obj: ClassObj) => {
   return obj.teacherName;
 };
 
-const Qno2 = nameOfTeacher(classObj);
+const two = nameOfTeacher(classObj);
 
 // 3. Write a function to print the names of all the students in the class.
 
@@ -81,11 +81,11 @@ const nameOfAllStudents = (obj: ClassObj) => {
   return arrayOfNames;
 };
 
-const Qno3 = nameOfAllStudents(classObj);
+const three = nameOfAllStudents(classObj);
 
 // 4. Write a function to print the IDs of all the students in the class
 
-const studentIDs = (obj: ClassObj) => {
+const studentIDs = (studentDetails: StudentDetails[]) => {
   let arrayOfID: string[] = [];
   for (let i = 0; i < studentDetails.length; i++) {
     let studentId: string = studentDetails[i].id;
@@ -94,7 +94,7 @@ const studentIDs = (obj: ClassObj) => {
   return arrayOfID;
 };
 
-const Qno4 = studentIDs(classObj);
+const four = studentIDs(studentDetails);
 
 // 5. Write a function to print the subject names for a specific student.
 
@@ -113,7 +113,7 @@ const subjectNames = (obj: ClassObj, name: string) => {
   }
 };
 
-const Qno5 = subjectNames(classObj, "Ravi");
+const five = subjectNames(classObj, "Ravi");
 
 //6. Write a function to print the marks of a specific student in all the subjects
 
@@ -131,12 +131,12 @@ const marksOfStudents = (obj: ClassObj, subject: string, name: string) => {
   return `${subject}: ${mark}`;
 };
 
-const Qno6 = marksOfStudents(classObj, "Computer", "Ravi");
+const six = marksOfStudents(classObj, "Computer", "Ravi");
 
 //7. Write a function to calculate and print the average marks for a specific student.
-const averageMarksOfEachStudent = (obj: ClassObj, name: string) => {
+const averageMarksOfEachStudent = (name: string) => {
   let totalMark: number = 0;
-  let academicDetails = filterStudentDetails(obj, name);
+  let academicDetails = filterStudentDetails(classObj, name);
   let averageMark: number = 0;
   academicDetails.forEach((detail) => {
     const academicPerformance = detail.marks;
@@ -148,22 +148,28 @@ const averageMarksOfEachStudent = (obj: ClassObj, name: string) => {
   return averageMark;
 };
 
-const Qno7 = averageMarksOfEachStudent(classObj, "Aju");
+const seven = averageMarksOfEachStudent("Aju");
 
 //8. Write a function to calculate and print the total marks for a specific student.
-const totalMarksOfEachStudent = (obj: ClassObj, name: string) => {
+const totalMarksOfEachStudent = (
+  studentDetails: StudentDetails[],
+  name: string
+) => {
   let totalMark: number = 0;
-  let academicDetails = filterStudentDetails(obj, name);
+  let academicDetails = filterStudentDetails(classObj, name);
   academicDetails.forEach((detail) => {
-    totalMark = averageMarksOfEachStudent(obj, name) * detail.marks.length;
+    totalMark = averageMarksOfEachStudent(name) * detail.marks.length;
   });
   return totalMark;
 };
 
-const Qno8 = totalMarksOfEachStudent(classObj, "Mini SS");
+const eight = totalMarksOfEachStudent(studentDetails, "Mini SS");
 
 //9. Write a function to calculate and print the average marks for all students in a specific subject.
-const subjectBasedAverageOfAllStudents = (obj: ClassObj, subject: string) => {
+const subjectBasedAverageOfAllStudents = (
+  studentDetails: StudentDetails[],
+  subject: string
+) => {
   let arrayOfMarks: number[] = [];
   let average = 0;
   let total = 0;
@@ -186,10 +192,13 @@ const subjectBasedAverageOfAllStudents = (obj: ClassObj, subject: string) => {
   return average;
 };
 
-const Qno9 = subjectBasedAverageOfAllStudents(classObj, "English");
+const nine = subjectBasedAverageOfAllStudents(studentDetails, "English");
 
 //10. Write a function to calculate and print the total marks for all students in a specific subject.
-const subjectBasedTotalOfAllStudents = (obj: ClassObj, subject: string) => {
+const subjectBasedTotalOfAllStudents = (
+  studentDetails: StudentDetails[],
+  subject: string
+) => {
   let totalMark = 0;
   let arrayOfMarks: number[] = [];
   for (let i = 0; i < studentDetails.length; i++) {
@@ -208,7 +217,7 @@ const subjectBasedTotalOfAllStudents = (obj: ClassObj, subject: string) => {
   return totalMark;
 };
 
-const Qno10 = subjectBasedTotalOfAllStudents(classObj, "English");
+const ten = subjectBasedTotalOfAllStudents(studentDetails, "English");
 
 //11. Write a function to find and print the student with the highest marks in a specific subject.
 type SubjectMark = {
@@ -216,7 +225,10 @@ type SubjectMark = {
   mark: number;
 };
 
-const studentWithHighestMark = (obj: ClassObj, subject: string) => {
+const studentWithHighestMark = (
+  studentDetails: StudentDetails[],
+  subject: string
+) => {
   let specificSubjectPerformance: SubjectMark[] = [];
   let subjectTopper: SubjectMark[] = [];
 
@@ -242,10 +254,13 @@ const studentWithHighestMark = (obj: ClassObj, subject: string) => {
   return subjectTopper;
 };
 
-const Qno11 = studentWithHighestMark(classObj, "Computer");
+const eleven = studentWithHighestMark(studentDetails, "Computer");
 
 //12.Write a function to find and print the student with the highest marks in a specific subject.
-const studentWithLowestMarkinSub = (subject: string, obj: ClassObj) => {
+const studentWithLowestMarkinSub = (
+  subject: string,
+  studentDetails: StudentDetails[]
+) => {
   let specificSubjectPerformance: SubjectMark[] = [];
   let studentWithLowestMark: SubjectMark[] = [];
 
@@ -271,15 +286,15 @@ const studentWithLowestMarkinSub = (subject: string, obj: ClassObj) => {
   return studentWithLowestMark;
 };
 
-const Qno12 = console.log(studentWithLowestMarkinSub("English", classObj));
+const twelve = studentWithLowestMarkinSub("English", studentDetails);
 
 //13. Write a function to find and print the student with the highest total marks.
-const studentWithHighestTotalMark = (obj: ClassObj) => {
+const studentWithHighestTotalMark = (studentDetails: StudentDetails[]) => {
   let totalMarks: SubjectMark[] = [];
   studentDetails.forEach((detail) => {
     totalMarks.push({
       name: detail.name,
-      mark: totalMarksOfEachStudent(classObj, detail.name),
+      mark: totalMarksOfEachStudent(studentDetails, detail.name),
     });
   });
 
@@ -293,15 +308,15 @@ const studentWithHighestTotalMark = (obj: ClassObj) => {
   return classTopper;
 };
 
-const Qno13 = console.log(studentWithHighestTotalMark(classObj));
+const thirteen = studentWithHighestTotalMark(studentDetails);
 
 //14. Write a function to find and print the student with the lowest total marks.
-const studentWithLowestTotalMark = (obj: ClassObj) => {
+const studentWithLowestTotalMark = (studentDetails: StudentDetails[]) => {
   let totalMarks: SubjectMark[] = [];
   studentDetails.forEach((detail) => {
     totalMarks.push({
       name: detail.name,
-      mark: totalMarksOfEachStudent(classObj, detail.name),
+      mark: totalMarksOfEachStudent(studentDetails, detail.name),
     });
   });
   let lowestTotal = totalMarks[0].mark;
@@ -316,7 +331,7 @@ const studentWithLowestTotalMark = (obj: ClassObj) => {
   return lowScorer;
 };
 
-const Qno14 = console.log(studentWithLowestTotalMark(classObj));
+const fourteen = studentWithLowestTotalMark(studentDetails);
 
 //15. 14.
 //15. Write a function to find and print the subject with the highest average marks.
@@ -324,24 +339,223 @@ type subjectAvgType = {
   subject: string;
   average: number;
 };
-const subjectWithHighestAvgMark = (obj: ClassObj) => {
+const subjectWithHighestAvgMark = (studentDetails: StudentDetails[]) => {
+  let subjectAvg: subjectAvgType[] = [];
+  let academicDetails: Marks[] = [];
+  let highestAvg = 0;
+  studentDetails.forEach((detail) => {
+    academicDetails = detail.marks;
+  });
+  academicDetails.forEach((subject) => {
+    subjectAvg.push({
+      subject: subject.subject,
+      average: subjectBasedAverageOfAllStudents(
+        studentDetails,
+        subject.subject
+      ),
+    });
+  });
+  subjectAvg.forEach((sub) => {
+    if (sub.average > highestAvg) {
+      highestAvg = sub.average;
+    }
+  });
+  const subWithHighestAvg = subjectAvg.filter(
+    (subavg) => subavg.average === highestAvg
+  );
+  return subWithHighestAvg;
+};
+const fifteen = subjectWithHighestAvgMark(studentDetails);
+
+//16. Write a function to find and print the subject with the lowest average marks.
+const subWithLowestAvg = (studentDetails: StudentDetails[]) => {
   let subjectAvg: subjectAvgType[] = [];
   let academicDetails: Marks[] = [];
   studentDetails.forEach((detail) => {
     academicDetails = detail.marks;
-    academicDetails.forEach((subject) => {
-      subjectAvg.push({
-        subject: subject.subject,
-        average: subjectBasedAverageOfAllStudents(classObj, subject.subject),
-      });
+  });
+  let lowestAvg = academicDetails[0].mark;
+  academicDetails.forEach((subject) => {
+    subjectAvg.push({
+      subject: subject.subject,
+      average: subjectBasedAverageOfAllStudents(
+        studentDetails,
+        subject.subject
+      ),
     });
   });
-  subjectAvg.forEach((average) => {
-    console.log(average);
+  subjectAvg.forEach((sub) => {
+    if (sub.average < lowestAvg) {
+      lowestAvg = sub.average;
+    }
   });
+  const subWithLowestAverage = subjectAvg.filter(
+    (subAvg) => subAvg.average === lowestAvg
+  );
+  return subWithLowestAverage;
 };
-const Qno15 = console.log(subjectWithHighestAvgMark(classObj));
+const sixteen = subWithLowestAvg(studentDetails);
 
+//17.Write a function to calculate and print the overall average marks for the class
+const overallAvgMarkForClass = (studentDetails: StudentDetails[]) => {
+  let totalMark = 0;
+  studentDetails.forEach((student) => {
+    totalMark += totalMarksOfEachStudent(studentDetails, student.name);
+  });
+  const overallAvg = totalMark / studentDetails.length;
+  return overallAvg;
+};
+
+const seventeen = overallAvgMarkForClass(studentDetails);
+
+//18. Write a function to calculate and print the overall total marks for the class.
+const totalMarkForClass = (studentDetails: StudentDetails[]) => {
+  let totalMark = 0;
+  studentDetails.forEach((student) => {
+    totalMark += totalMarksOfEachStudent(studentDetails, student.name);
+  });
+  return totalMark;
+};
+
+const eighteen = totalMarkForClass(studentDetails);
+
+//19. Write a function to calculate and print the average marks for each subject.
+type subjectData = {
+  subject: string;
+  mark: number;
+};
+const averageMarksForEachSub = (
+  studentDetails: StudentDetails[],
+  subject: string
+) => {
+  let specificSubjectData: subjectData[] = [];
+  let marksArray: number[] = [];
+  let subjectTotal = 0;
+  studentDetails.forEach((student) => {
+    specificSubjectData = student.marks.filter(
+      (data) => data.subject === subject
+    );
+
+    specificSubjectData.forEach((data) => {
+      marksArray.push(data.mark)
+    })
+  });
+  marksArray.forEach((mark) => {
+    subjectTotal += mark
+  })
+  const subjectAvg = subjectTotal/marksArray.length
+  return subjectAvg
+};
+
+const nineteen = averageMarksForEachSub(studentDetails, "English");
+
+//20. Write a function to calculate and print the total marks for each subject
+
+const totalMarkForEachSub = (studentDetails:StudentDetails[], subject:string) => {
+  let specificSubjectData: subjectData[] = [];
+  let marksArray: number[] = [];
+  let subjectTotal = 0;
+  studentDetails.forEach((student) => {
+    specificSubjectData = student.marks.filter(
+      (data) => data.subject === subject
+    );
+    specificSubjectData.forEach((data) => {
+      marksArray.push(data.mark)
+    })
+  });
+  marksArray.forEach((mark) => {
+    subjectTotal += mark
+  })
+  return subjectTotal
+}
+
+const twenty = totalMarkForEachSub(studentDetails, "English")
+
+//21. Write a function to find and print the subject with the highest total marks.
+type SubMarkType = {
+  subject: string,
+  mark:number
+}
+const subWithHighestTotalMark = (studentDetails:StudentDetails[]) => {
+  let totalMarksArray:SubMarkType[] = []
+  let subName = ''
+  studentDetails.forEach((student) => {
+    student.marks.forEach((subMark) => {
+      totalMarksArray.push({
+        subject: subMark.subject,
+        mark: totalMarkForEachSub(studentDetails, subMark.subject)
+      })
+    })
+  })
+  let highestTotal = 0
+  totalMarksArray.forEach((total) => {
+    if(total.mark > highestTotal){
+      highestTotal = total.mark
+    }
+  })
+  const subDetailsOfHighestTotal = totalMarksArray.filter(sub => sub.mark === highestTotal)
+  subDetailsOfHighestTotal.forEach((sub) => {
+    subName = sub.subject
+  })
+  return subName
+}
+
+const twentyOne = subWithHighestTotalMark(studentDetails)
+
+//22. Write a function to find and print the subject with the lowest total marks.
+const subWithLowestTotalMark = (studentDetails:StudentDetails[]) => {
+ let academicDetails:Marks[] = []
+ let totalMarksArray:SubMarkType[] = []
+ let subName = ''
+ studentDetails.forEach((student) => {
+  academicDetails = student.marks
+ })
+ academicDetails.forEach((performance) => {
+  totalMarksArray.push({
+    subject: performance.subject,
+    mark: totalMarkForEachSub(studentDetails, performance.subject)
+  })
+ })
+ let lowestTotal:number = totalMarksArray[0].mark
+ totalMarksArray.forEach((total) => {
+  if(total.mark < lowestTotal){
+    lowestTotal = total.mark
+  }
+ })
+ const subDetailsWithLowestTotal = totalMarksArray.filter(details => details.mark === lowestTotal)
+ subDetailsWithLowestTotal.forEach((sub) => {
+  subName = sub.subject
+ })
+ return subName
+}
+
+const twentyTwo = subWithLowestTotalMark(studentDetails)
+
+//23. Write a function to find and print the student(s) with the highest average marks.
+const studentWithHighestAvgMark = (studentDetails:StudentDetails[]) => {
+  let studentAndTotal:SubjectMark[] = []
+  let studentName = ""
+  studentDetails.forEach((student) => {
+    studentAndTotal.push({
+      name: student.name,
+      mark: totalMarksOfEachStudent(studentDetails, student.name)
+    })
+  })
+  let highestTotal = 0
+  studentAndTotal.forEach((student) => {
+    if(student.mark > highestTotal){
+      highestTotal = student.mark
+    }
+  })
+  const highestAvg = highestTotal/studentDetails.length
+  const studentWithHighestAvg = studentAndTotal.filter(total => total.mark / studentDetails.length === highestAvg)
+  studentWithHighestAvg.forEach((student) => {
+    studentName = student.name
+  })
+  return studentName
+}
+
+const twentyThree = studentWithHighestAvgMark(studentDetails)
 //=========================================================================
 
 //Commonly used functions
@@ -355,46 +569,76 @@ function filterStudentDetails(obj: ClassObj, name: string): StudentDetails[] {
 
 const whichQuestionToBeExecuted = (question: any) => {
   switch (question) {
-    case Qno1:
-      console.log(Qno1);
+    case one:
+      console.log(one);
       break;
-    case Qno2:
-      console.log(Qno2);
+    case two:
+      console.log(two);
       break;
-    case Qno3:
-      console.log(Qno3);
+    case three:
+      console.log(three);
       break;
-    case Qno4:
-      console.log(Qno4);
+    case four:
+      console.log(four);
       break;
-    case Qno5:
-      console.log(Qno5);
+    case five:
+      console.log(five);
       break;
-    case Qno6:
-      console.log(Qno6);
+    case six:
+      console.log(six);
       break;
-    case Qno7:
-      console.log(Qno7);
+    case seven:
+      console.log(seven);
       break;
-    case Qno8:
-      console.log(Qno8);
+    case eight:
+      console.log(eight);
       break;
-    case Qno9:
-      console.log(Qno9);
+    case nine:
+      console.log(nine);
       break;
-    case Qno10:
-      console.log(Qno10);
+    case ten:
+      console.log(ten);
       break;
-    case Qno11:
-      console.log(Qno11);
+    case eleven:
+      console.log(eleven);
       break;
-    case Qno12:
-      console.log(Qno12);
+    case twelve:
+      console.log(twelve);
       break;
-    case Qno13:
-      console.log(Qno13);
+    case thirteen:
+      console.log(thirteen);
+      break;
+    case fourteen:
+      console.log(fourteen);
+      break;
+    case fifteen:
+      console.log(fifteen);
+      break;
+    case sixteen:
+      console.log(sixteen);
+      break;
+    case seventeen:
+      console.log(seventeen);
+      break;
+    case eighteen:
+      console.log(eighteen);
+      break;
+    case nineteen:
+      console.log(nineteen);
+      break;
+    case twenty:
+      console.log(twenty)
+      break;
+    case twentyOne:
+      console.log(twentyOne);
+      break;
+    case twentyTwo:
+      console.log(twentyTwo);
+      break;
+    case twentyThree:
+      console.log(twentyThree);
       break;
   }
 };
 
-whichQuestionToBeExecuted(Qno14);
+whichQuestionToBeExecuted(twentyOne);
