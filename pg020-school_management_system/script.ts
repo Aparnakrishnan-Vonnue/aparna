@@ -556,6 +556,119 @@ const studentWithHighestAvgMark = (studentDetails:StudentDetails[]) => {
 }
 
 const twentyThree = studentWithHighestAvgMark(studentDetails)
+
+//24. Write a function to find and print the student(s) with the lowest average marks.
+const studentsWithLowestAvgMark = (studentDetails:StudentDetails[]) => {
+  let studentAndTotal:SubjectMark[] = []
+  let studentName = ""
+  studentDetails.forEach((student) => {
+    studentAndTotal.push({
+      name: student.name,
+      mark: totalMarksOfEachStudent(studentDetails, student.name)
+    })
+  })
+  let lowestTotal= studentAndTotal[0].mark
+  studentAndTotal.forEach((student) => {
+    if(student.mark < lowestTotal){
+      lowestTotal = student.mark
+    }
+  })
+  const lowestAvg = lowestTotal/studentDetails.length
+  const studentsWithLowestAvg = studentAndTotal.filter(total => total.mark/studentDetails.length === lowestAvg)
+  studentsWithLowestAvg.forEach((student) => {
+    studentName = student.name
+  })
+  return studentName
+}
+
+const twentyFour = studentsWithLowestAvgMark(studentDetails)
+
+//25. Write a function to find and print the student(s) with the highest total marks.
+//26.Write a function to find and print the student(s) with the lowest total marks.
+//27. Write a function to calculate and print the number of students who scored above a certain mark in a specific subject.
+const studentsScoredaboveAMarkLt = (studentDetails:StudentDetails[], subject:string, marklt: number) => {
+  let academicDetails:Marks[] = []
+  let studentWithMarkAboveLT: string[] = []
+  let studentMark:SubjectMark[] = []
+
+  studentDetails.forEach((stDetail) => {
+    academicDetails = stDetail.marks
+    academicDetails.forEach((acDetail) => {
+      if(acDetail.subject === subject){
+        studentMark.push({
+          name: stDetail.name,
+          mark: acDetail.mark
+        })
+      }
+    })
+  })
+  studentMark.forEach((student) => {
+    if(student.mark > marklt){
+      studentWithMarkAboveLT.push(student.name)
+    }
+  })
+  return studentWithMarkAboveLT
+}
+const twentySeven = studentsScoredaboveAMarkLt(studentDetails, "Chemistry", 40)
+
+//28. Write a function to calculate and print the number of students who scored below a certain mark in a specific subject.
+const studentsScoredBelowAMarkLt = (studentDetails:StudentDetails[], subject:string, marklt:number) => {
+  let academicDetails:Marks[] = []
+  let studentsWithMarkBelowLT: string[] = []
+  let studentMark:SubjectMark[] = []
+
+  studentDetails.forEach((stDetail) => {
+    academicDetails = stDetail.marks
+    academicDetails.forEach((acDetail) => {
+      if(acDetail.subject === subject){
+        studentMark.push({
+          name: stDetail.name,
+          mark: acDetail.mark
+        })
+      }
+    })
+  })
+  studentMark.forEach((student) => {
+    if(student.mark < marklt){
+      studentsWithMarkBelowLT.push(student.name)
+    }
+  })
+  return studentsWithMarkBelowLT
+}
+
+const twentyEight = studentsScoredBelowAMarkLt(studentDetails, "Maths", 40)
+
+//29. Write a function to calculate and print the number of students who scored above a certain mark in all subjects.
+type nameSubMark = {
+  name:string,
+  subject:string,
+  mark:number
+}
+const studentScoredAboveAMarkLtinAllSub = (studentDetails:StudentDetails[], marklt:number) => {
+  let studentMark:nameSubMark[] = []
+  let academicDetails:Marks[] = []
+  let resultArray:string[] = []
+  studentDetails.forEach((stDetail) => {
+    academicDetails = stDetail.marks
+  })
+}
+
+const twentyNine = studentScoredAboveAMarkLtinAllSub(studentDetails, 40)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //=========================================================================
 
 //Commonly used functions
@@ -638,7 +751,15 @@ const whichQuestionToBeExecuted = (question: any) => {
     case twentyThree:
       console.log(twentyThree);
       break;
+    case twentyFour:
+      console.log(twentyFour);
+      break;
+    case twentySeven:
+      console.log(twentySeven);
+      break;
+    case twentyEight:
+      console.log(twentyEight)
   }
 };
 
-whichQuestionToBeExecuted(twentyOne);
+whichQuestionToBeExecuted(twentyEight);
