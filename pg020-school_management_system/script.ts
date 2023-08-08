@@ -639,18 +639,18 @@ const studentsScoredBelowAMarkLt = (studentDetails:StudentDetails[], subject:str
 const twentyEight = studentsScoredBelowAMarkLt(studentDetails, "Maths", 40)
 
 //29. Write a function to calculate and print the number of students who scored above a certain mark in all subjects.
-type nameSubMark = {
-  name:string,
-  subject:string,
-  mark:number
-}
+
 const studentScoredAboveAMarkLtinAllSub = (studentDetails:StudentDetails[], marklt:number) => {
-  let studentMark:nameSubMark[] = []
   let academicDetails:Marks[] = []
-  let resultArray:string[] = []
-  studentDetails.forEach((stDetail) => {
+  let studentMarkArray:SubjectMark[] = []
+  let marksArray:number[] = []
+  studentDetails.forEach((stDetail, idx) => {
     academicDetails = stDetail.marks
+    academicDetails.forEach((acDetail,i) => {
+      console.log(studentDetails[idx].marks[i])
+    })
   })
+
 }
 
 const twentyNine = studentScoredAboveAMarkLtinAllSub(studentDetails, 40)
@@ -758,8 +758,12 @@ const whichQuestionToBeExecuted = (question: any) => {
       console.log(twentySeven);
       break;
     case twentyEight:
-      console.log(twentyEight)
+      console.log(twentyEight);
+      break;
+    case twentyNine:
+      console.log(twentyNine);
+      break;
   }
 };
 
-whichQuestionToBeExecuted(twentyEight);
+whichQuestionToBeExecuted(twentyNine);
