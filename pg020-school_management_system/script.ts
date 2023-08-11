@@ -53,6 +53,7 @@ const classObj: ClassObj = {
 
 //global variables
 const studentDetails: StudentDetails[] = classObj.students;
+const totalNumberOfStudents: number = studentDetails.length;
 
 // 1. Write a function to print the name of the class.
 
@@ -437,21 +438,24 @@ const averageMarksForEachSub = (
     );
 
     specificSubjectData.forEach((data) => {
-      marksArray.push(data.mark)
-    })
+      marksArray.push(data.mark);
+    });
   });
   marksArray.forEach((mark) => {
-    subjectTotal += mark
-  })
-  const subjectAvg = subjectTotal/marksArray.length
-  return subjectAvg
+    subjectTotal += mark;
+  });
+  const subjectAvg = subjectTotal / marksArray.length;
+  return subjectAvg;
 };
 
 const nineteen = averageMarksForEachSub(studentDetails, "English");
 
 //20. Write a function to calculate and print the total marks for each subject
 
-const totalMarkForEachSub = (studentDetails:StudentDetails[], subject:string) => {
+const totalMarkForEachSub = (
+  studentDetails: StudentDetails[],
+  subject: string
+) => {
   let specificSubjectData: subjectData[] = [];
   let marksArray: number[] = [];
   let subjectTotal = 0;
@@ -460,200 +464,628 @@ const totalMarkForEachSub = (studentDetails:StudentDetails[], subject:string) =>
       (data) => data.subject === subject
     );
     specificSubjectData.forEach((data) => {
-      marksArray.push(data.mark)
-    })
+      marksArray.push(data.mark);
+    });
   });
   marksArray.forEach((mark) => {
-    subjectTotal += mark
-  })
-  return subjectTotal
-}
+    subjectTotal += mark;
+  });
+  return subjectTotal;
+};
 
-const twenty = totalMarkForEachSub(studentDetails, "English")
+const twenty = totalMarkForEachSub(studentDetails, "English");
 
 //21. Write a function to find and print the subject with the highest total marks.
 type SubMarkType = {
-  subject: string,
-  mark:number
-}
-const subWithHighestTotalMark = (studentDetails:StudentDetails[]) => {
-  let totalMarksArray:SubMarkType[] = []
-  let subName = ''
+  subject: string;
+  mark: number;
+};
+const subWithHighestTotalMark = (studentDetails: StudentDetails[]) => {
+  let totalMarksArray: SubMarkType[] = [];
+  let subName = "";
   studentDetails.forEach((student) => {
     student.marks.forEach((subMark) => {
       totalMarksArray.push({
         subject: subMark.subject,
-        mark: totalMarkForEachSub(studentDetails, subMark.subject)
-      })
-    })
-  })
-  let highestTotal = 0
+        mark: totalMarkForEachSub(studentDetails, subMark.subject),
+      });
+    });
+  });
+  let highestTotal = 0;
   totalMarksArray.forEach((total) => {
-    if(total.mark > highestTotal){
-      highestTotal = total.mark
+    if (total.mark > highestTotal) {
+      highestTotal = total.mark;
     }
-  })
-  const subDetailsOfHighestTotal = totalMarksArray.filter(sub => sub.mark === highestTotal)
+  });
+  const subDetailsOfHighestTotal = totalMarksArray.filter(
+    (sub) => sub.mark === highestTotal
+  );
   subDetailsOfHighestTotal.forEach((sub) => {
-    subName = sub.subject
-  })
-  return subName
-}
+    subName = sub.subject;
+  });
+  return subName;
+};
 
-const twentyOne = subWithHighestTotalMark(studentDetails)
+const twentyOne = subWithHighestTotalMark(studentDetails);
 
 //22. Write a function to find and print the subject with the lowest total marks.
-const subWithLowestTotalMark = (studentDetails:StudentDetails[]) => {
- let academicDetails:Marks[] = []
- let totalMarksArray:SubMarkType[] = []
- let subName = ''
- studentDetails.forEach((student) => {
-  academicDetails = student.marks
- })
- academicDetails.forEach((performance) => {
-  totalMarksArray.push({
-    subject: performance.subject,
-    mark: totalMarkForEachSub(studentDetails, performance.subject)
-  })
- })
- let lowestTotal:number = totalMarksArray[0].mark
- totalMarksArray.forEach((total) => {
-  if(total.mark < lowestTotal){
-    lowestTotal = total.mark
-  }
- })
- const subDetailsWithLowestTotal = totalMarksArray.filter(details => details.mark === lowestTotal)
- subDetailsWithLowestTotal.forEach((sub) => {
-  subName = sub.subject
- })
- return subName
-}
+const subWithLowestTotalMark = (studentDetails: StudentDetails[]) => {
+  let academicDetails: Marks[] = [];
+  let totalMarksArray: SubMarkType[] = [];
+  let subName = "";
+  studentDetails.forEach((student) => {
+    academicDetails = student.marks;
+  });
+  academicDetails.forEach((performance) => {
+    totalMarksArray.push({
+      subject: performance.subject,
+      mark: totalMarkForEachSub(studentDetails, performance.subject),
+    });
+  });
+  let lowestTotal: number = totalMarksArray[0].mark;
+  totalMarksArray.forEach((total) => {
+    if (total.mark < lowestTotal) {
+      lowestTotal = total.mark;
+    }
+  });
+  const subDetailsWithLowestTotal = totalMarksArray.filter(
+    (details) => details.mark === lowestTotal
+  );
+  subDetailsWithLowestTotal.forEach((sub) => {
+    subName = sub.subject;
+  });
+  return subName;
+};
 
-const twentyTwo = subWithLowestTotalMark(studentDetails)
+const twentyTwo = subWithLowestTotalMark(studentDetails);
 
 //23. Write a function to find and print the student(s) with the highest average marks.
-const studentWithHighestAvgMark = (studentDetails:StudentDetails[]) => {
-  let studentAndTotal:SubjectMark[] = []
-  let studentName = ""
+const studentWithHighestAvgMark = (studentDetails: StudentDetails[]) => {
+  let studentAndTotal: SubjectMark[] = [];
+  let studentName = "";
   studentDetails.forEach((student) => {
     studentAndTotal.push({
       name: student.name,
-      mark: totalMarksOfEachStudent(studentDetails, student.name)
-    })
-  })
-  let highestTotal = 0
+      mark: totalMarksOfEachStudent(studentDetails, student.name),
+    });
+  });
+  let highestTotal = 0;
   studentAndTotal.forEach((student) => {
-    if(student.mark > highestTotal){
-      highestTotal = student.mark
+    if (student.mark > highestTotal) {
+      highestTotal = student.mark;
     }
-  })
-  const highestAvg = highestTotal/studentDetails.length
-  const studentWithHighestAvg = studentAndTotal.filter(total => total.mark / studentDetails.length === highestAvg)
+  });
+  const highestAvg = highestTotal / studentDetails.length;
+  const studentWithHighestAvg = studentAndTotal.filter(
+    (total) => total.mark / studentDetails.length === highestAvg
+  );
   studentWithHighestAvg.forEach((student) => {
-    studentName = student.name
-  })
-  return studentName
-}
+    studentName = student.name;
+  });
+  return studentName;
+};
 
-const twentyThree = studentWithHighestAvgMark(studentDetails)
+const twentyThree = studentWithHighestAvgMark(studentDetails);
 
 //24. Write a function to find and print the student(s) with the lowest average marks.
-const studentsWithLowestAvgMark = (studentDetails:StudentDetails[]) => {
-  let studentAndTotal:SubjectMark[] = []
-  let studentName = ""
+const studentsWithLowestAvgMark = (studentDetails: StudentDetails[]) => {
+  let studentAndTotal: SubjectMark[] = [];
+  let studentName = "";
   studentDetails.forEach((student) => {
     studentAndTotal.push({
       name: student.name,
-      mark: totalMarksOfEachStudent(studentDetails, student.name)
-    })
-  })
-  let lowestTotal= studentAndTotal[0].mark
+      mark: totalMarksOfEachStudent(studentDetails, student.name),
+    });
+  });
+  let lowestTotal = studentAndTotal[0].mark;
   studentAndTotal.forEach((student) => {
-    if(student.mark < lowestTotal){
-      lowestTotal = student.mark
+    if (student.mark < lowestTotal) {
+      lowestTotal = student.mark;
     }
-  })
-  const lowestAvg = lowestTotal/studentDetails.length
-  const studentsWithLowestAvg = studentAndTotal.filter(total => total.mark/studentDetails.length === lowestAvg)
+  });
+  const lowestAvg = lowestTotal / studentDetails.length;
+  const studentsWithLowestAvg = studentAndTotal.filter(
+    (total) => total.mark / studentDetails.length === lowestAvg
+  );
   studentsWithLowestAvg.forEach((student) => {
-    studentName = student.name
-  })
-  return studentName
-}
+    studentName = student.name;
+  });
+  return studentName;
+};
 
-const twentyFour = studentsWithLowestAvgMark(studentDetails)
+const twentyFour = studentsWithLowestAvgMark(studentDetails);
 
 //25. Write a function to find and print the student(s) with the highest total marks.
 //26.Write a function to find and print the student(s) with the lowest total marks.
 //27. Write a function to calculate and print the number of students who scored above a certain mark in a specific subject.
-const studentsScoredaboveAMarkLt = (studentDetails:StudentDetails[], subject:string, marklt: number) => {
-  let academicDetails:Marks[] = []
-  let studentWithMarkAboveLT: string[] = []
-  let studentMark:SubjectMark[] = []
+const studentsScoredaboveAMarkLtinSpSub = (
+  studentDetails: StudentDetails[],
+  subject: string,
+  marklt: number
+) => {
+  let academicDetails: Marks[] = [];
+  let studentWithMarkAboveLT: string[] = [];
+  let studentMark: SubjectMark[] = [];
 
   studentDetails.forEach((stDetail) => {
-    academicDetails = stDetail.marks
+    academicDetails = stDetail.marks;
     academicDetails.forEach((acDetail) => {
-      if(acDetail.subject === subject){
+      if (acDetail.subject === subject) {
         studentMark.push({
           name: stDetail.name,
-          mark: acDetail.mark
-        })
+          mark: acDetail.mark,
+        });
       }
-    })
-  })
+    });
+  });
   studentMark.forEach((student) => {
-    if(student.mark > marklt){
-      studentWithMarkAboveLT.push(student.name)
+    if (student.mark > marklt) {
+      studentWithMarkAboveLT.push(student.name);
     }
-  })
-  return studentWithMarkAboveLT
-}
-const twentySeven = studentsScoredaboveAMarkLt(studentDetails, "Chemistry", 40)
+  });
+  return studentWithMarkAboveLT;
+};
+const twentySeven = studentsScoredaboveAMarkLtinSpSub(
+  studentDetails,
+  "Chemistry",
+  40
+);
 
 //28. Write a function to calculate and print the number of students who scored below a certain mark in a specific subject.
-const studentsScoredBelowAMarkLt = (studentDetails:StudentDetails[], subject:string, marklt:number) => {
-  let academicDetails:Marks[] = []
-  let studentsWithMarkBelowLT: string[] = []
-  let studentMark:SubjectMark[] = []
+const studentsScoredBelowAMarkLtinSpSub = (
+  studentDetails: StudentDetails[],
+  subject: string,
+  marklt: number
+) => {
+  let academicDetails: Marks[] = [];
+  let studentsWithMarkBelowLT: string[] = [];
+  let studentMark: SubjectMark[] = [];
 
   studentDetails.forEach((stDetail) => {
-    academicDetails = stDetail.marks
+    academicDetails = stDetail.marks;
     academicDetails.forEach((acDetail) => {
-      if(acDetail.subject === subject){
+      if (acDetail.subject === subject) {
         studentMark.push({
           name: stDetail.name,
-          mark: acDetail.mark
-        })
+          mark: acDetail.mark,
+        });
       }
-    })
-  })
+    });
+  });
   studentMark.forEach((student) => {
-    if(student.mark < marklt){
-      studentsWithMarkBelowLT.push(student.name)
+    if (student.mark < marklt) {
+      studentsWithMarkBelowLT.push(student.name);
     }
-  })
-  return studentsWithMarkBelowLT
-}
+  });
+  return studentsWithMarkBelowLT;
+};
 
-const twentyEight = studentsScoredBelowAMarkLt(studentDetails, "Maths", 40)
+const twentyEight = studentsScoredBelowAMarkLtinSpSub(
+  studentDetails,
+  "Maths",
+  40
+);
 
 //29. Write a function to calculate and print the number of students who scored above a certain mark in all subjects.
+type StudentMarkArrayType = {
+  name: string;
+  mark: number[];
+};
+const studentScoredAboveAMarkLtinAllSub = (
+  studentDetails: StudentDetails[],
+  marklt: number
+) => {
+  let academicDetails: Marks[] = [];
+  let studentMarkArray: StudentMarkArrayType[] = [];
+  let marksArray: number[] = [];
+  let resultingStudentArray: string[] = [];
+  let isAboveLt = false;
+  studentDetails.forEach((stDetail) => {
+    academicDetails = stDetail.marks;
+    academicDetails.forEach((acDetail, i) => {
+      marksArray.push(acDetail.mark);
+    });
+    studentMarkArray.push({
+      name: stDetail.name,
+      mark: marksArray,
+    });
+    marksArray = [];
+  });
+  studentMarkArray.forEach((student, i) => {
+    let markOfEachStudent = studentMarkArray[i].mark;
+    for (let j = 0; j < markOfEachStudent.length; j++) {
+      if (markOfEachStudent[j] < marklt) {
+        isAboveLt = false;
+        break;
+      }
+      isAboveLt = true;
+    }
+    if (isAboveLt) {
+      resultingStudentArray.push(student.name);
+    }
+  });
+  return resultingStudentArray;
+};
 
-const studentScoredAboveAMarkLtinAllSub = (studentDetails:StudentDetails[], marklt:number) => {
-  let academicDetails:Marks[] = []
-  let studentMarkArray:SubjectMark[] = []
-  let marksArray:number[] = []
-  studentDetails.forEach((stDetail, idx) => {
-    academicDetails = stDetail.marks
-    academicDetails.forEach((acDetail,i) => {
-      console.log(studentDetails[idx].marks[i])
-    })
-  })
+const twentyNine = studentScoredAboveAMarkLtinAllSub(studentDetails, 20);
 
+//30. Write a function to calculate and print the number of students who scored below a certain mark in all subjects.
+
+const studentScoredBelowAMarkLtinAllSub = (
+  studentDetails: StudentDetails[],
+  marklt: number
+) => {
+  let academicDetails: Marks[] = [];
+  let studentMarkArray: StudentMarkArrayType[] = [];
+  let marksArray: number[] = [];
+  let resultingStudentArray: string[] = [];
+  let isBelowLt = false;
+  studentDetails.forEach((stDetail) => {
+    academicDetails = stDetail.marks;
+    academicDetails.forEach((acDetail, i) => {
+      marksArray.push(acDetail.mark);
+    });
+    studentMarkArray.push({
+      name: stDetail.name,
+      mark: marksArray,
+    });
+    marksArray = [];
+  });
+  studentMarkArray.forEach((student, i) => {
+    let markOfEachStudent = studentMarkArray[i].mark;
+    for (let j = 0; j < markOfEachStudent.length; j++) {
+      if (markOfEachStudent[j] > marklt) {
+        isBelowLt = false;
+        break;
+      }
+      isBelowLt = true;
+    }
+    if (isBelowLt) {
+      resultingStudentArray.push(student.name);
+    }
+  });
+  return resultingStudentArray;
+};
+
+const thirty = studentScoredBelowAMarkLtinAllSub(studentDetails, 40);
+
+//31. Write a function to calculate and print the percentage of students who scored above a certain mark in a specific subject.
+
+const percentageOfStudentsScoredAboveltinSpSub = (
+  studentDetails: StudentDetails[],
+  subject: string
+) => {
+  const studentsScoredAboveLt: string[] = studentsScoredaboveAMarkLtinSpSub(
+    studentDetails,
+    subject,
+    40
+  );
+  const percentageOfStudents =
+    (studentsScoredAboveLt.length / totalNumberOfStudents) * 100;
+  return `${percentageOfStudents} %`;
+};
+
+const thirtyOne = percentageOfStudentsScoredAboveltinSpSub(
+  studentDetails,
+  "Maths"
+);
+
+//32. Write a function to calculate and print the percentage of students who scored below a certain mark in a specific subject.
+
+const percentageOfStudentsScoredBelowltinSpSub = (
+  studentDetails: StudentDetails[],
+  subject: string
+) => {
+  const studentsScoredBelowLt: string[] = studentsScoredBelowAMarkLtinSpSub(
+    studentDetails,
+    subject,
+    30
+  );
+  const percentageOfStudents =
+    (studentsScoredBelowLt.length / totalNumberOfStudents) * 100;
+  return `${percentageOfStudents}%`;
+};
+
+const thirtyTwo = percentageOfStudentsScoredBelowltinSpSub(
+  studentDetails,
+  "English"
+);
+
+//33. Write a function to calculate and print the percentage of students who scored above a certain mark in all subjects.
+const percentageOfStudentsScoredAboveltinAllSub = (
+  studentDetails: StudentDetails[]
+) => {
+  const studentScoredAboveLt: string[] = studentScoredAboveAMarkLtinAllSub(
+    studentDetails,
+    40
+  );
+  const percentageOfStudents =
+    (studentScoredAboveLt.length / totalNumberOfStudents) * 100;
+  return `${percentageOfStudents}%`;
+};
+
+const thirtyThree = percentageOfStudentsScoredAboveltinAllSub(studentDetails);
+
+//34.  Write a function to calculate and print the percentage of students who scored below a certain mark in all subjects.
+const percentageOfStudentsScoredBelowltinAllSub = (
+  studentDetails: StudentDetails[]
+) => {
+  const studentScoredBelowLt: string[] = studentScoredBelowAMarkLtinAllSub(
+    studentDetails,
+    40
+  );
+  const percentageOfStudents =
+    (studentScoredBelowLt.length / totalNumberOfStudents) * 100;
+  return `${percentageOfStudents}%`;
+};
+
+const thirtyFour = percentageOfStudentsScoredBelowltinAllSub(studentDetails);
+
+//35. Write a function to find and print the student(s) with the highest percentage of marks.
+const studentsWithHighestPercentageOfMarks = (
+  studentDetails: StudentDetails[]
+) => {
+  const academicDetail = academicDetails(studentDetails);
+  let highestPercentage = 0;
+  let studentsWithHighestPercentage: string[] = [];
+  academicDetail.forEach((studentData) => {
+    if (studentData.percentage > highestPercentage) {
+      highestPercentage = studentData.percentage;
+    }
+  });
+  academicDetail.forEach((data) => {
+    if (data.percentage === highestPercentage) {
+      studentsWithHighestPercentage.push(data.name);
+    }
+  });
+  return studentsWithHighestPercentage;
+};
+
+const thirtyFive = studentsWithHighestPercentageOfMarks(studentDetails);
+
+//36.Write a function to find and print the student(s) with the lowest percentage of marks.
+const studentsWithLowestPercentageOfMarks = (
+  studentDetails: StudentDetails[]
+) => {
+  const academicDetail = academicDetails(studentDetails);
+  let lowestPercentage = academicDetail[0].percentage;
+  let studentsWithLowestPercentage: string[] = [];
+  academicDetail.forEach((studentData) => {
+    if (studentData.percentage < lowestPercentage) {
+      lowestPercentage = studentData.percentage;
+    }
+  });
+  academicDetail.forEach((data) => {
+    if (data.percentage === lowestPercentage) {
+      studentsWithLowestPercentage.push(data.name);
+    }
+  });
+  return studentsWithLowestPercentage;
+};
+
+const thirtySix = studentsWithLowestPercentageOfMarks(studentDetails);
+
+//37. Write a function to find and print the subject(s) with the highest percentage of marks.
+const subjectWithHighestPercentage = (studentDetails: StudentDetails[]) => {
+  const subjectDetail = subjectDetails(studentDetails);
+  let highestPercentage = 0;
+  let resultedSubArray: string[] = [];
+  subjectDetail.forEach((subject) => {
+    if (subject.percentage > highestPercentage) {
+      highestPercentage = subject.percentage;
+    }
+  });
+  subjectDetail.forEach((subject) => {
+    if (subject.percentage === highestPercentage) {
+      resultedSubArray.push(subject.subjectName);
+    }
+  });
+  return resultedSubArray;
+};
+
+const thirtySeven = subjectWithHighestPercentage(studentDetails);
+
+//38.Write a function to find and print the subject(s) with the lowest percentage of marks.
+const subjectWithLowestPercentage = (studentDetails: StudentDetails[]) => {
+  const subjectDetail = subjectDetails(studentDetails);
+  let lowestPercentage = subjectDetail[0].percentage;
+  let resultedSubArray: string[] = [];
+  subjectDetail.forEach((subject) => {
+    if (subject.percentage < lowestPercentage) {
+      lowestPercentage = subject.percentage;
+    }
+  });
+  subjectDetail.forEach((subject) => {
+    if (subject.percentage === lowestPercentage) {
+      resultedSubArray.push(subject.subjectName);
+    }
+  });
+  return resultedSubArray;
+};
+
+const thirtyEight = subjectWithLowestPercentage(studentDetails);
+
+//39. Write a function to find and print the student(s) with the highest percentage of marks in a specific subject.
+type percentageArray = {
+  name: string;
+  percentage: number;
+};
+const studentsWithHighestPercentageInSpecificSub = (
+  studentDetails: StudentDetails[],
+  subject: string
+) => {
+  let academicDetail: Marks[] = [];
+  let percentage = 0;
+  let percentageArray: percentageArray[] = [];
+  let highestPercentage = 0;
+  let resultArray: string[] = [];
+  let maxMark: number = 50;
+  studentDetails.forEach((student) => {
+    academicDetail = student.marks;
+    academicDetail.forEach((detail) => {
+      if (detail.subject === subject) {
+        percentage = (detail.mark / maxMark) * 100;
+      }
+    });
+    percentageArray.push({
+      name: student.name,
+      percentage: percentage,
+    });
+  });
+  percentageArray.forEach((studentPercent) => {
+    if (studentPercent.percentage > highestPercentage) {
+      highestPercentage = studentPercent.percentage;
+    }
+  });
+  percentageArray.forEach((student) => {
+    if (student.percentage === highestPercentage) {
+      resultArray.push(student.name);
+    }
+  });
+  return resultArray;
+};
+
+const thirtyNine = studentsWithHighestPercentageInSpecificSub(
+  studentDetails,
+  "Computer"
+);
+
+//40. Write a function to find and print the student(s) with the lowest percentage of marks in a specific subject.
+const studentsWithLowestPercentageinSpSub = (
+  studentDetails: StudentDetails[],
+  subject: string
+) => {
+  let academicDetail: Marks[] = [];
+  let percentage = 0;
+  let percentageArray: percentageArray[] = [];
+  let resultArray: string[] = [];
+  let maxMark: number = 50;
+  studentDetails.forEach((student) => {
+    academicDetail = student.marks;
+    academicDetail.forEach((detail) => {
+      if (detail.subject === subject) {
+        percentage = (detail.mark / maxMark) * 100;
+      }
+    });
+    percentageArray.push({
+      name: student.name,
+      percentage: percentage,
+    });
+  });
+  let LowestPercentage = percentageArray[0].percentage;
+  percentageArray.forEach((studentPercent) => {
+    if (studentPercent.percentage < LowestPercentage) {
+      LowestPercentage = studentPercent.percentage;
+    }
+  });
+  percentageArray.forEach((student) => {
+    if (student.percentage === LowestPercentage) {
+      resultArray.push(student.name);
+    }
+  });
+  return resultArray;
+};
+
+const forty = studentsWithLowestPercentageinSpSub(studentDetails, "Maths");
+
+//41. Write a function to find and print the subject(s) with the highest percentage of marks for a specific student.
+type subjectPercentage = {
+  subject: string;
+  percentage: number;
+};
+const subjectsWithHighestPercentForSpStudent = (
+  studentDetails: StudentDetails[],
+  name: string
+) => {
+  let resultArray: string[] = [];
+  let percentageArray: subjectPercentage[] = [];
+  let percentageForEachSub: number = 0;
+  let maxMark: number = 50;
+  studentDetails.forEach((stDetail) => {
+    if (name === stDetail.name) {
+      stDetail.marks.forEach((subMark) => {
+        percentageForEachSub = (subMark.mark / maxMark) * 100;
+        percentageArray.push({
+          subject: subMark.subject,
+          percentage: percentageForEachSub,
+        });
+      });
+    }
+  });
+  let highestPercentage = 0;
+  percentageArray.forEach((subPercent) => {
+    if (subPercent.percentage > highestPercentage) {
+      highestPercentage = subPercent.percentage;
+    }
+  });
+  percentageArray.forEach((subPercent) => {
+    if (subPercent.percentage === highestPercentage) {
+      resultArray.push(subPercent.subject);
+    }
+  });
+  return resultArray;
+};
+
+const fortyOne = subjectsWithHighestPercentForSpStudent(
+  studentDetails,
+  "Mini SS"
+);
+
+//42. Write a function to find and print the subject(s) with the highest percentage of marks for a specific student.
+const subjectsWithLowestPercentForSpStudent = (
+  studentDetails: StudentDetails[],
+  name: string
+) => {
+  let resultArray: string[] = [];
+  let percentageArray: subjectPercentage[] = [];
+  let percentageForEachSub: number = 0;
+  let maxMark: number = 50;
+  studentDetails.forEach((stDetail) => {
+    if (name === stDetail.name) {
+      stDetail.marks.forEach((subMark) => {
+        percentageForEachSub = (subMark.mark / maxMark) * 100;
+        percentageArray.push({
+          subject: subMark.subject,
+          percentage: percentageForEachSub,
+        });
+      });
+    }
+  });
+  let LowestPercentage = percentageArray[0].percentage;
+  percentageArray.forEach((subPercent) => {
+    if (subPercent.percentage < LowestPercentage) {
+      LowestPercentage = subPercent.percentage;
+    }
+  });
+  percentageArray.forEach((subPercent) => {
+    if (subPercent.percentage === LowestPercentage) {
+      resultArray.push(subPercent.subject);
+    }
+  });
+  return resultArray;
+};
+
+const fortyTwo = subjectsWithLowestPercentForSpStudent(
+  studentDetails,
+  "Mini SS"
+);
+
+//43. Write a function to find and print the subject(s) in which all students scored above a certain mark.
+type subjectMarkType = {
+  subject: string;
+  mark: number[];
+};
+
+const subjectsAboveMarkLt = (studentDetails:StudentDetails[], markLt:number) => {
+  
 }
 
-const twentyNine = studentScoredAboveAMarkLtinAllSub(studentDetails, 40)
+console.log(subjectsAboveMarkLt(studentDetails,30))
+
+
+
+
+
 
 
 
@@ -678,6 +1110,81 @@ function filterStudentDetails(obj: ClassObj, name: string): StudentDetails[] {
     (student) => name === student.name
   );
   return academicDetails;
+}
+
+type academicDetailType = {
+  name: string;
+  marks: number[];
+  totalMark: number;
+  percentage: number;
+};
+
+function academicDetails(studentDetails: StudentDetails[]) {
+  let academicDetails: Marks[] = [];
+  let markArray: number[] = [];
+  let studentMarkArray: academicDetailType[] = [];
+  let percentageOfEachStudent: number = 0;
+  const maxScoreForStudent = 250;
+  studentDetails.forEach((stDetail) => {
+    academicDetails = stDetail.marks;
+    academicDetails.forEach((acDetail) => {
+      markArray.push(acDetail.mark);
+    });
+
+    const totalMarkOfEachstudent: number = totalMarksOfEachStudent(
+      studentDetails,
+      stDetail.name
+    );
+    percentageOfEachStudent =
+      (totalMarkOfEachstudent / maxScoreForStudent) * 100;
+    studentMarkArray.push({
+      name: stDetail.name,
+      marks: markArray,
+      totalMark: totalMarkOfEachstudent,
+      percentage: percentageOfEachStudent,
+    });
+    markArray = [];
+  });
+  return studentMarkArray;
+}
+
+type subjectDetailType = {
+  subjectName: string;
+  totalMark: number;
+  totalAverage: number;
+  percentage: number;
+  maxMarkForClass: number;
+  // markForEachStudent:number[]
+};
+
+function subjectDetails(studentDetails: StudentDetails[]) {
+  const maxMarkForClass = 250;
+  let academicDetail: Marks[] = [];
+
+  let subjectDetails: subjectDetailType[] = [];
+  studentDetails.forEach((student) => {
+    academicDetail = student.marks;
+  });
+
+  academicDetail.forEach((performance) => {
+    const totalMarkForSub = totalMarkForEachSub(
+      studentDetails,
+      performance.subject
+    );
+    const totalAverage = averageMarksForEachSub(
+      studentDetails,
+      performance.subject
+    );
+    const percentageForEachSub = (totalMarkForSub / maxMarkForClass) * 100;
+    subjectDetails.push({
+      subjectName: performance.subject,
+      totalMark: totalMarkForSub,
+      totalAverage: totalAverage,
+      percentage: percentageForEachSub,
+      maxMarkForClass: maxMarkForClass,
+    });
+  });
+  return subjectDetails;
 }
 
 const whichQuestionToBeExecuted = (question: any) => {
@@ -740,7 +1247,7 @@ const whichQuestionToBeExecuted = (question: any) => {
       console.log(nineteen);
       break;
     case twenty:
-      console.log(twenty)
+      console.log(twenty);
       break;
     case twentyOne:
       console.log(twentyOne);
@@ -763,7 +1270,46 @@ const whichQuestionToBeExecuted = (question: any) => {
     case twentyNine:
       console.log(twentyNine);
       break;
+    case thirty:
+      console.log(thirty);
+      break;
+    case thirtyOne:
+      console.log(thirtyOne);
+      break;
+    case thirtyTwo:
+      console.log(thirtyTwo);
+      break;
+    case thirtyThree:
+      console.log(thirtyThree);
+      break;
+    case thirtyFour:
+      console.log(thirtyFour);
+      break;
+    case thirtyFive:
+      console.log(thirtyFive);
+      break;
+    case thirtySix:
+      console.log(thirtySix);
+      break;
+    case thirtySeven:
+      console.log(thirtySeven);
+      break;
+    case thirtyEight:
+      console.log(thirtyEight);
+      break;
+    case thirtyNine:
+      console.log(thirtyNine);
+      break;
+    case forty:
+      console.log(forty);
+      break;
+    case fortyOne:
+      console.log(fortyOne);
+      break;
+    case fortyTwo:
+      console.log(fortyTwo);
+      break;
   }
 };
 
-whichQuestionToBeExecuted(twentyNine);
+whichQuestionToBeExecuted(fortyTwo);
