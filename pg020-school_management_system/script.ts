@@ -8,7 +8,7 @@ const classObj: ClassObj = {
       name: "Ravi",
       id: "101",
       marks: [
-        { subject: "English", mark: 25 },
+        { subject: "English", mark: 50 },
         { subject: "Maths", mark: 48 },
         { subject: "Physics", mark: 40 },
         { subject: "Chemistry", mark: 30 },
@@ -1071,19 +1071,148 @@ const fortyTwo = subjectsWithLowestPercentForSpStudent(
 );
 
 //43. Write a function to find and print the subject(s) in which all students scored above a certain mark.
-type subjectMarkType = {
-  subject: string;
-  mark: number[];
+
+const subjectsAboveMarkLt = (
+  studentDetails: StudentDetails[],
+  markLt: number
+) => {
+  let resultedSubjects: string[] = [];
+  const subjectObj: Record<string, number[]> = subjectMarkData(studentDetails);
+
+  for (let key in subjectObj) {
+    for (let i = 0; i < subjectObj[key].length; i++) {
+      if (subjectObj[key][i] <= markLt) {
+        break;
+      }
+      if (i === subjectObj[key].length - 1) {
+        resultedSubjects.push(key);
+      }
+    }
+  }
+  return resultedSubjects;
 };
 
-const subjectsAboveMarkLt = (studentDetails:StudentDetails[], markLt:number) => {
-  
+const fortyThree = subjectsAboveMarkLt(studentDetails, 25);
+
+//44.  Write a function to find and print the subject(s) in which all students scored below a certain mark.
+
+const subjectsBelowMarkLt = (
+  studentDetails: StudentDetails[],
+  markLt: number
+) => {
+  let resultedSubjects: string[] = [];
+  let subjectObj: Record<string, number[]> = subjectMarkData(studentDetails);
+  for (let key in subjectObj) {
+    for (let i = 0; i < subjectObj[key].length; i++) {
+      if (subjectObj[key][i] >= markLt) {
+        break;
+      }
+      if (i === subjectObj[key].length - 1) {
+        resultedSubjects.push(key);
+      }
+    }
+  }
+  return resultedSubjects;
+};
+
+const fortyFour = subjectsBelowMarkLt(studentDetails, 49);
+
+//45. Write a function to find and print the subject(s) in which the average marks of all students are above a certain mark.
+const subAvgAboveLt = (studentDetails: StudentDetails[], markLt: number) => {
+  let subjectAvg: Record<string, number> = {};
+  let resultedSubjectArray: string[] = [];
+
+  studentDetails.forEach((stDetail) => {
+    stDetail.marks.forEach((markList) => {
+      subjectAvg[markList.subject] = subjectBasedAverageOfAllStudents(
+        studentDetails,
+        markList.subject
+      );
+    });
+  });
+
+  for (let subject in subjectAvg) {
+    if (subjectAvg[subject] > markLt) {
+      resultedSubjectArray.push(subject);
+    }
+  }
+  return resultedSubjectArray;
+};
+
+const fortyFive = subAvgAboveLt(studentDetails, 34);
+
+//46. Write a function to find and print the subject(s) in which the average marks of all students are below a certain mark.
+
+const subAvgBelowLt = (studentDetails: StudentDetails[], markLt: number) => {
+  let subjectAvg: Record<string, number> = {};
+  let resultedSubjectArray: string[] = [];
+
+  studentDetails.forEach((stDetail) => {
+    stDetail.marks.forEach((markList) => {
+      subjectAvg[markList.subject] = subjectBasedAverageOfAllStudents(
+        studentDetails,
+        markList.subject
+      );
+    });
+  });
+  for (let subject in subjectAvg) {
+    if (subjectAvg[subject] < markLt) {
+      resultedSubjectArray.push(subject);
+    }
+  }
+  return resultedSubjectArray;
+};
+
+const fortySix = subAvgBelowLt(studentDetails, 34);
+
+//47. Write a function to find and print the student(s) who scored the highest marks in at least one subject.
+const topperInAtleastOneSub = (studentDetails: StudentDetails[]) => {
+  let topperInSub:SubjectMark[] = []
+  let topperSub: any= {}
+ studentDetails.forEach((stDetail) => {
+  stDetail.marks.forEach((markList) => {
+    topperInSub = studentWithHighestMark(studentDetails, markList.subject)
+    topperInSub.forEach((topper) => {
+      if(topperSub[markList.subject]){
+        topperSub[topper.name] = [...topperSub[topper.name], [topper.mark]]
+      }else{
+        topperSub[topper.name] = topper.mark
+      }
+    })
+  })
+})
+return topperSub
+};
+
+const fortySeven = topperInAtleastOneSub(studentDetails);
+
+//48. Write a function to find and print the student(s) who scored the lowest marks in at least one subject.
+const leastScorerInAtleastOneSub = (studentDetails:StudentDetails[]) => {
+  let leastScorerInSub:SubjectMark[] = []
+  let leastScorer:any = {}
+  studentDetails.forEach((stDetail) => {
+    stDetail.marks.forEach((markList) => {
+      leastScorerInSub = studentWithLowestMarkinSub( markList.subject, studentDetails)
+      leastScorerInSub.forEach((student) => {
+        if(leastScorer[markList.subject]){
+          leastScorer[student.name] = [...leastScorer[student.name], [student.mark]]
+        }else {
+          leastScorer[student.name] = student.mark
+        }
+      })
+    })
+  })
+  return leastScorer
 }
 
-console.log(subjectsAboveMarkLt(studentDetails,30))
-
-
-
+const fortyEight = leastScorerInAtleastOneSub(studentDetails)
+ 
+//49. Write a function to calculate and print the average marks for each student in each subject.
+//  const avgMarksForEachStudentInEachSub = (studentDetails:StudentDetails[], name:string) => {
+  
+//  }
+ 
+//  const fortyNine = avgMarksForEachStudentInEachSub(studentDetails, "Aju")
 
 
 
@@ -1185,6 +1314,23 @@ function subjectDetails(studentDetails: StudentDetails[]) {
     });
   });
   return subjectDetails;
+}
+
+function subjectMarkData(studentDetails: StudentDetails[]) {
+  let subjectMarkObj: Record<string, number[]> = {};
+  studentDetails.forEach((stDetail) => {
+    stDetail.marks.forEach((markList) => {
+      if (subjectMarkObj[markList.subject]) {
+        subjectMarkObj[markList.subject] = [
+          ...subjectMarkObj[markList.subject],
+          markList.mark,
+        ];
+      } else {
+        subjectMarkObj[markList.subject] = [markList.mark];
+      }
+    });
+  });
+  return subjectMarkObj;
 }
 
 const whichQuestionToBeExecuted = (question: any) => {
@@ -1309,7 +1455,28 @@ const whichQuestionToBeExecuted = (question: any) => {
     case fortyTwo:
       console.log(fortyTwo);
       break;
+    case fortyThree:
+      console.log(fortyThree);
+      break;
+    case fortyFour:
+      console.log(fortyFour);
+      break;
+    case fortyFive:
+      console.log(fortyFive);
+      break;
+    case fortySix:
+      console.log(fortySix);
+      break;
+    case fortySeven:
+      console.log(fortySeven);
+      break;
+    case fortyEight:
+      console.log(fortyEight);
+      break;
+    case fortyNine:
+      console.log(fortyNine);
+      break;
   }
 };
 
-whichQuestionToBeExecuted(fortyTwo);
+whichQuestionToBeExecuted(fortyNine);
