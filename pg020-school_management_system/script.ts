@@ -1414,12 +1414,7 @@ const fiftyEight = belowAvgSubjects(studentDetails)
 
 //59. Write a function to find and print the subject(s) in which the highest percentage of students scored above a certain mark.
 
-const topPerformedSubject = (studentDetails:StudentDetails[], markLt:number) => {
-  // console.log(percentageOfStudentsScoredAboveltinSpSub(studentDetails, "English"))
-  
-}
 
-const fiftyNine = topPerformedSubject(studentDetails, 30)
 
 
 //=========================================================================
