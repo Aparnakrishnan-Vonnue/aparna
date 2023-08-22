@@ -1519,6 +1519,7 @@ function subjectMarkData(studentDetails: StudentDetails[]) {
       }
     });
   });
+  console.log(subjectMarkObj)
   return subjectMarkObj;
 }
 
