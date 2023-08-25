@@ -1413,6 +1413,7 @@ const belowAvgSubjects = (studentDetails:StudentDetails[]) => {
 const fiftyEight = belowAvgSubjects(studentDetails)
 
 //59. Write a function to find and print the subject(s) in which the highest percentage of students scored above a certain mark.
+                                                                                                         
 
 
 
