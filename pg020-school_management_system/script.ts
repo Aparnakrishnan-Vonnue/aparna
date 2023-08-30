@@ -1695,4 +1695,4 @@ const whichQuestionToBeExecuted = (question: any) => {
 };
 }
 
-whichQuestionToBeExecuted(fiftyNine)
+whichQuestionToBeExecuted(fiftyEight)
