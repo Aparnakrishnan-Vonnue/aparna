@@ -99,15 +99,16 @@ const list_of_holidays = [
   "05-10-2023",
   "05-11-2023",
   "05-12-2023",
-  "05-13-2023"
+  "05-13-2023",
+  "03-04-2023"
 ];
 
 const list_of_birthdays = [
-  "05-13-2023",
+  // "05-13-2023",
   // "02-26-1994",
   // "01-12-1999",
   // "03-28-1998",
-  // "12-22-1995",
+  "12-22-1995",
   // "04-01-1998",
   // "12-05-1994",
   // "03-05-1976",
@@ -121,7 +122,6 @@ const list_of_birthdays = [
 
 
 const day_to_celebrate = (bdays) => {
-
   for (let i = 0; i < bdays.length; i++) {
     let date_of_bday = new Date(bdays[i]);
 
@@ -138,16 +138,12 @@ const day_to_celebrate = (bdays) => {
     if (current_bday.getDay() !== 6) {
       console.log(postpone_date(current_bday, 365));
     } 
-    else {
-      
-    }
   }
 };
 
 day_to_celebrate(list_of_birthdays);
 
 function postpone_date(current_bday, number_of_days) {
-
   let postponed_dates = [];
   let current_date = new Date(current_bday);
   let sorted_list_of_holidays = list_of_holidays.sort(date_comparison);
@@ -169,10 +165,10 @@ function postpone_date(current_bday, number_of_days) {
           continue;
         } 
         else {
-          break;
+          return `${postponed_dates[i - 1]} is apt`
         }
-        
       }
+      break;
     }
   }
 }
