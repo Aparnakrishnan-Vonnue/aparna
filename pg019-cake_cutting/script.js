@@ -100,30 +100,32 @@ const list_of_holidays = [
   "05-11-2023",
   "05-12-2023",
   "05-13-2023",
-  "03-04-2023"
+  "01-13-2023"
 ];
 
 const list_of_birthdays = [
-  // "05-13-2023",
-  // "02-26-1994",
-  // "01-12-1999",
-  // "03-28-1998",
+  "01-11-2023",
+  "05-13-2023",
+  "02-26-1994",
+  "01-12-1999",
+  "03-28-1998",
   "12-22-1995",
-  // "04-01-1998",
-  // "12-05-1994",
-  // "03-05-1976",
-  // "12-29-1962",
-  // "01-31-2000",
-  // "07-16-2002",
-  // "07-18-2002",
-  // "12-01-1992"
+  "04-01-1998",
+  "12-05-1994",
+  "03-05-1976",
+  "12-29-1962",
+  "01-31-2000",
+  "07-16-2002",
+  "07-18-2002",
+  "12-01-1992"
 ];
 
 
 
 const day_to_celebrate = (bdays) => {
   for (let i = 0; i < bdays.length; i++) {
-    let date_of_bday = new Date(bdays[i]);
+    let date_of_bday = (new Date(bdays[i]));
+    let bdays_on_saturday = ""
 
     const current_year_equivalent = convert_to_current_year(
       date_of_bday.getFullYear()
@@ -134,9 +136,18 @@ const day_to_celebrate = (bdays) => {
       date_of_bday.getMonth(),
       date_of_bday.getDate()
     );
-
     if (current_bday.getDay() !== 6) {
       console.log(postpone_date(current_bday, 365));
+    }
+    else{
+      list_of_holidays.forEach((holiday) => {
+        if(current_bday.toDateString() !== new Date(holiday).toDateString()){
+          bdays_on_saturday = current_bday
+          return (`${bdays_on_saturday} is appropriate for cutting the cake for bdays on ${current_bday}`)
+        }else{
+          console.log(postpone_date(current_bday, 365))
+        }
+      })
     } 
   }
 };
@@ -149,27 +160,35 @@ function postpone_date(current_bday, number_of_days) {
   let sorted_list_of_holidays = list_of_holidays.sort(date_comparison);
 
   for (let i = 0; i < number_of_days; i++) {
-    current_date.setDate(current_date.getDate() + 1);
-
-    postponed_dates.push(new Date(current_date));
-
-    if (postponed_dates[i].getDay() === 6) {
-
-      for (let k = 0; k < sorted_list_of_holidays.length; k++) {
-        
-        let date_of_holiday = new Date(sorted_list_of_holidays[k]);
-        if (postponed_dates[i].getTime() !== date_of_holiday.getTime()) {
-          if (date_of_holiday.getTime() > postponed_dates[i].getTime()) { 
-            return `${postponed_dates[i]} is appropriate  for cake cutting for bdays on ${current_bday}`;
-          } 
-          continue;
-        } 
-        else {
-          return `${postponed_dates[i - 1]} is apt`
+    if(current_date.getDay() !== 6){
+      current_date.setDate(current_date.getDate() + 1);
+    }
+    for (let k = 0; k < sorted_list_of_holidays.length; k++) {       
+      let date_of_holiday = (new Date(sorted_list_of_holidays[k]));
+    if(new Date(current_date).toDateString() !== date_of_holiday.toDateString()){ 
+      if(date_of_holiday > new Date(current_date)){
+        postponed_dates.push(new Date(current_date))
+        if(new Date(current_date).getDay() === 6 && new Date(current_date).toDateString() !== date_of_holiday.toDateString()){
+          return `${new Date(current_date)} is appropriate for cutting cake for bdays on ${current_bday}`
+        }
+        break;
+      } 
+      continue;
+    }else {
+      if(new Date(current_date).getDay() === 6){
+        if(postponed_dates.length === 0 && new Date(current_date).toDateString() !== date_of_holiday.toDateString()){
+         return `${current_bday} is appropriate for cutting cakes for bdays on ${current_bday}`
+        } else {
+          if(postponed_dates.length === 0 && new Date(current_date).toDateString() === date_of_holiday.toDateString()){
+            current_date.setDate(current_date.getDate() + 1)
+            break;
+          }
+          return `${postponed_dates[postponed_dates.length - 1]} is appropriate for cutting cakes for bdays on ${current_bday}`
         }
       }
       break;
     }
+  }
   }
 }
 
