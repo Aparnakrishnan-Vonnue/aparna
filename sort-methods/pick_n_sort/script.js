@@ -18,7 +18,6 @@ function sortAnArray(iArray) {
   return iArray;
 }
 
-
 const testCases = [
   {
     inputArray: [1, 5, 3, 8],
@@ -58,14 +57,14 @@ function testFunctionToSortAnArray(tCases) {
   tCases.forEach((tCase, idx) => {
     for (
       let i = 0, j = 0;
-      i < tCase.expectedOutPut.length &&
-      j < sortAnArray(tCase.inputArray).length;
+      i < tCase.expectedOutPut.length + 1 &&
+      j < sortAnArray(tCase.inputArray).length + 1;
       i++, j++
     ) {
       if (tCase.expectedOutPut[i] === sortAnArray(tCase.inputArray)[j]) {
         if (
-          i === tCase.expectedOutPut.length - 1 &&
-          j === sortAnArray(tCase.inputArray).length - 1
+          i === tCase.expectedOutPut.length &&
+          j === sortAnArray(tCase.inputArray).length
         ) {
           console.log(`Testcase ${idx} passed`);
         }
