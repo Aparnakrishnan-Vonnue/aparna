@@ -1,20 +1,22 @@
 let inputArray = [8, 6, 28, 5]
 
 function selectionSort(iArray){
-    let tempStore = 0
-    let smallest = iArray[0]
-  for(let i = 0; i < iArray.length; i++){
-    for(let j = i + 1; j < iArray.length; j++){
+  let smallest = 0
+  let sortedSubList = []
+  let temp = 0
+  for(let i = 0; i < iArray.length + 2; i++){
+    smallest = iArray[0]
+    for(let j = i; j < iArray.length; j++){
         if(iArray[j] < smallest){
-            smallest = inputArray[j]
-            tempStore = iArray[i]
-            iArray[i] = smallest
-            iArray[j] = tempStore
+          smallest = iArray[j]
         }
+      }
+      sortedSubList.push(smallest)
+      iArray.splice(iArray.indexOf(smallest), iArray.indexOf(smallest))
     }
-  }
-  console.log(iArray)
+ return(sortedSubList)
 }
 
 console.log(selectionSort(inputArray))
+
 
