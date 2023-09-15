@@ -15,10 +15,10 @@ function longestSequenceBtwTwoNumbers(num1, num2) {
     }
     for (let j = 0; j <= sequence.length; j++) {
       let inputNum = sequence[j];
-      if (sequence[j] % 2 === 0) {
-        sequence.push(sequence[j] / 2);
+      if (inputNum % 2 === 0) {
+        sequence.push(inputNum / 2);
       } else {
-        sequence.push(3 * sequence[j] + 1);
+        sequence.push(3 * inputNum + 1);
       }
       if (sequence[sequence.length - 1] === 1) {
         setOfSequences.push(sequence);
