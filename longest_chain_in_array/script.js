@@ -129,8 +129,9 @@
 // console.log(returnLongestChain(inputArray))
 
 //Attempt 5
-let inputArray = [2, 6, 3, 4, 8, 2, 1, 6, 10];
-// let inputArray = [ 1, 2, 7, 5,9, 8, 6,7, 10, 2, 3];
+// let inputArray = [2, 6, 3, 4, 8, 2, 1, 6, 10];
+// let inputArray = [ 1, 2, 7,1,-1, 5,9, 8, 6,7, 10, 2, 3];
+let inputArray = [0, -6, 2, -3, 4, -1, 0, 10, 3, 0, 5                                              ]
 
 
 function returnLongestChainInArray(iArray) {
