@@ -130,46 +130,46 @@
 
 //Attempt 5
 // let inputArray = [2, 6, 3, 4, 8, 2, 1, 6, 10];
-// let inputArray = [ 1, 2, 7,1,-1, 5,9, 8, 6,7, 10, 2, 3];
-let inputArray = [0, -6, 2, -3, 4, -1, 0, 10, 3, 0, 5                                              ]
+// // let inputArray = [ 1, 2, 7,1,-1, 5,9, 8, 6,7, 10, 2, 3];
+// // let inputArray = [0, -6, 2, -3, 4, -1, 0, 10, 3, 0, 5                                              ]
 
 
-function returnLongestChainInArray(iArray) {
-  let chain = [];
-  let setOfChains = [];
-  let numberOfIteration = 0;
-  let tracker = numberOfIteration
-  for (let start = 0; start < iArray.length; start++) {
-    numberOfIteration = start + 1;
-    chain.push(iArray[start]);
-    tracker = numberOfIteration
-    while (1) {
-        if(tracker > iArray.length - 1){
-            setOfChains.push(chain)
-            numberOfIteration++
-            tracker = numberOfIteration
-            chain = [iArray[start]]
-        }
-      if (numberOfIteration > iArray.length - 1) {
-        chain = []
-        break;
-      }
-      if (iArray[tracker] > chain[chain.length - 1]) {
-        chain.push(iArray[tracker]);
-      }
-      tracker++
-    }
-  }
-  let longest = setOfChains[0].length
-  for(let index = 0; index < setOfChains.length; index++){
-    if(setOfChains[index].length > longest){
-        longest = setOfChains[index]
-    }
-    longest = setOfChains[0]
-  }
-  return longest
-}
+// function returnLongestChainInArray(iArray) {
+//   let chain = [];
+//   let setOfChains = [];
+//   let numberOfIteration = 0;
+//   let tracker = numberOfIteration
+//   for (let start = 0; start < iArray.length; start++) {
+//     numberOfIteration = start + 1;
+//     chain.push(iArray[start]);
+//     tracker = numberOfIteration
+//     while (1) {
+//         if(tracker > iArray.length - 1){
+//             setOfChains.push(chain)
+//             numberOfIteration++
+//             tracker = numberOfIteration
+//             chain = [iArray[start]]
+//         }
+//       if (numberOfIteration > iArray.length - 1) {
+//         chain = []
+//         break;
+//       }
+//       if (iArray[tracker] > chain[chain.length - 1]) {
+//         chain.push(iArray[tracker]);
+//       }
+//       tracker++
+//     }
+//   }
+//   let longest = setOfChains[0].length
+//   for(let index = 0; index < setOfChains.length; index++){
+//     if(setOfChains[index].length > longest){
+//         longest = setOfChains[index]
+//     }
+//     longest = setOfChains[0]
+//   }
+//   return longest
+// }
 
-console.log(returnLongestChainInArray(inputArray));
+// console.log(returnLongestChainInArray(inputArray));
 
 
