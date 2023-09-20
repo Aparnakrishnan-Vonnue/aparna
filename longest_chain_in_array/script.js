@@ -170,6 +170,6 @@
 //   return longest
 // }
 
-returnLongestChainInArray(inputArray);
+console.log(returnLongestChainInArray(inputArray));
 
 
