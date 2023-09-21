@@ -97,6 +97,40 @@ function testLongestChainBtwTwoNumbers(tCases) {
 
 // testLongestChainBtwTwoNumbers(testCases);
 
+// function convergentSeriesMaxLength(num1, num2) {
+//   let sequence = [num1];
+//   let numOfIteration = num1;
+//   let length = 0;
+
+//   while (numOfIteration <= num2) {
+//     if (num1 === 0) {
+//       return `this will result in an infinite loop`;
+//     }
+//     if (!sequence.length) {
+//       sequence.push(numOfIteration);
+//     }
+//     for (let j = 0; j <= sequence.length; j++) {
+//       let inputNum = sequence[j];
+//       inputNum % 2 === 0
+//         ? sequence.push(inputNum / 2)
+//         : sequence.push(3 * inputNum + 1);
+//       if (sequence[sequence.length - 1] === 1) {
+//         if (sequence.length > length) {
+//           length = sequence.length;
+//           sequence = [];
+//         }
+//         sequence = [];
+//         break;
+//       }
+//     }
+//     numOfIteration++;
+//   }
+//   return `The longest convergent series for ${num1}, ${num2} is ${length}`;
+// }
+
+// console.log(convergentSeriesMaxLength(2, 10000000));
+
+
 function convergentSeriesMaxLength(num1, num2) {
   let sequence = [num1];
   let numOfIteration = num1;
