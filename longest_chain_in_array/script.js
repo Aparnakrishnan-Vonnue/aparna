@@ -166,7 +166,6 @@ function returnLongestChainInArray(iArray) {
         longest = setOfChains[index]
     }
     longest = setOfChains[0]
-    console.log(longest)
   }
   return longest
 }
