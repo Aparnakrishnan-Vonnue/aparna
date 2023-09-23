@@ -197,4 +197,4 @@
 //Object Creation Expressions
 // console.log(new Object(2, 3))
 // console.log(new Date())
-// console.log(new Object)
+console.log(new Object)
