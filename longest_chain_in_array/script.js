@@ -167,6 +167,7 @@ function returnLongestChainInArray(iArray) {
     }
     longest = setOfChains[0]
   }
+  console.log(longest);
   return longest
 }
 returnLongestChainInArray(inputArray);
