@@ -98,16 +98,16 @@ function testNthPrime(tCases) {
 
 testNthPrime(testCases);
 
-// function findNthPrime(n) {
-//   let listOfPrimeNumbers = [];
-//   let inputNum = 2;
-//   while (listOfPrimeNumbers.length < n) {
-//     if (isPrime(inputNum)) {
-//       listOfPrimeNumbers.push(inputNum);
-//     }
-//     inputNum++;
-//   }
+function findNthPrime(n) {
+  let listOfPrimeNumbers = [];
+  let inputNum = 2;
+  while (listOfPrimeNumbers.length < n) {
+    if (isPrime(inputNum)) {
+      listOfPrimeNumbers.push(inputNum);
+    }
+    inputNum++;
+  }
 
-//   return listOfPrimeNumbers[n - 1];
-// }
+  return listOfPrimeNumbers[n - 1];
+}
 
