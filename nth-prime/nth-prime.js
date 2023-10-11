@@ -16,7 +16,7 @@
 //   }
 //   console.log(listOfPrimeNumbers);
 //   return listOfPrimeNumbers[position - 1];
-// }
+ }
 
 // console.log(findNthPrime(100));
 
