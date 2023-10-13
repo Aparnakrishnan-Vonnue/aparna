@@ -35,18 +35,18 @@ function convertWord(inputStr) {
 
 function histogram(inputStr) {
   let modifiedArray = convertWord(inputStr);
-  let sortedArray = sortArray(modifiedArray);
+  sortArray(modifiedArray);
   let histogramObj = {};
   let count = 1;
-
-  for (let i = 0; i < sortedArray.length; i++) {
-    for (let j = i + 1; j < sortedArray.length - 1; j++) {
-      if (sortedArray[i] === sortedArray[j]) {
-        count = count + 1;
-        histogramObj[sortedArray[i]] = count;
+  for (let i = 0; i < modifiedArray.length; i++) {
+    for (let j = i + 1; j < modifiedArray.length - 1; j++) {
+      if (modifiedArray[i] === modifiedArray[j]) {
+        if (histogramObj[modifiedArray[i]]) {
+          break;
+        }
       } else {
         if (count < 2) {
-          histogramObj[sortedArray[i]] = 1;
+          histogramObj[modifiedArray[i]] = 1;
         }
       }
     }
@@ -54,7 +54,7 @@ function histogram(inputStr) {
   return histogramObj;
 }
 
-console.log(histogram("hello "));
+console.log(histogram("helllo ."));
 
 function sortArray(arr) {
   let temp = "";
