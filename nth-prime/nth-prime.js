@@ -58,7 +58,7 @@ function findNthPrime(n) {
     }
     inputNum++;
   }
-
+console.log(inputNum - 1)
   return inputNum - 1;
 }
 function isPrime(number) {
