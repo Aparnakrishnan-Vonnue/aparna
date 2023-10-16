@@ -22,6 +22,9 @@ function convertWord(inputStr) {
       case ".":
         modifiedString += "dt" + " ";
         break;
+      case ",":
+        modifiedString += "co" + " ";
+        break;
       default:
         if (specialCharacters.includes(defaultChar)) {
           modifiedString += "ot" + " ";
@@ -33,28 +36,55 @@ function convertWord(inputStr) {
   return modifiedString.trim().split(" ");
 }
 
-function histogram(inputStr) {
+function histogram(givenStr) {
+  let inputStr = givenStr.toLowerCase();
   let modifiedArray = convertWord(inputStr);
   sortArray(modifiedArray);
   let histogramObj = {};
   let count = 1;
+  let maxLength = 1;
+  let spaceRequired = 0;
+  let resultantHistogram = {};
+
   for (let i = 0; i < modifiedArray.length; i++) {
-    for (let j = i + 1; j < modifiedArray.length - 1; j++) {
+    if (histogramObj[modifiedArray[i]]) {
+      continue;
+    }
+    for (let j = i + 1; j < modifiedArray.length + 1; j++) {
       if (modifiedArray[i] === modifiedArray[j]) {
         if (histogramObj[modifiedArray[i]]) {
-          break;
+          histogramObj[modifiedArray[i]] += 1;
+        } else {
+          histogramObj[modifiedArray[i]] = count + 1;
         }
       } else {
         if (count < 2) {
-          histogramObj[modifiedArray[i]] = 1;
+          if (!histogramObj[modifiedArray[i]]) {
+            histogramObj[modifiedArray[i]] = 1;
+          } else {
+            continue;
+          }
         }
       }
     }
   }
-  return histogramObj;
-}
+  Object.keys(histogramObj).forEach((key) => {
+    key.length > maxLength ? (maxLength = key.length) : maxLength;
+  });
 
-console.log(histogram("helllo ."));
+  Object.entries(histogramObj).forEach(([key, value]) => {
+    let starPattern = "*".repeat(value);
+    if (key.length !== maxLength) {
+      spaceRequired = maxLength - key.length;
+      key += " ".repeat(spaceRequired + 1);
+    } else {
+      key += " ";
+    }
+    resultantHistogram[key] = starPattern;
+  });
+
+  return resultantHistogram;
+}
 
 function sortArray(arr) {
   let temp = "";
@@ -75,3 +105,121 @@ function sortArray(arr) {
   }
   return arr;
 }
+
+const testCases = [
+  {
+    word: "hello World.",
+    output: {
+      "d  ": "*",
+      "e  ": "*",
+      "h  ": "*",
+      "l  ": "***",
+      "o  ": "**",
+      "r  ": "*",
+      "w  ": "*",
+      "sp ": "*",
+      "dt ": "*",
+    },
+  },
+  {
+    word: "@gmail.com",
+    output: {
+      "a  ": "*",
+      "c  ": "*",
+      "g  ": "*",
+      "i  ": "*",
+      "l  ": "*",
+      "m  ": "**",
+      "o  ": "*",
+      "dt ": "*",
+      "ot ": "*",
+    },
+  },
+  {
+    word: "Vonnue@1234#",
+    output: {
+      "1  ": "*",
+      "2  ": "*",
+      "3  ": "*",
+      "4  ": "*",
+      "e  ": "*",
+      "n  ": "**",
+      "o  ": "*",
+      "ot ": "**",
+      "u  ": "*",
+      "v  ": "*",
+    },
+  },
+  {
+    word: "Malayalam    ",
+    output: {
+      "a  ": "****",
+      "l  ": "**",
+      "m  ": "**",
+      "sp ": "****",
+      "y  ": "*",
+    },
+  },
+  {
+    word: "@#!$%",
+    output: { "ot ": "*****" },
+  },
+  {
+    word: "MoNoToNoUs",
+    output: {
+      "m ": "*",
+      "n ": "**",
+      "o ": "****",
+      "s ": "*",
+      "t ": "*",
+      "u ": "*",
+    },
+  },
+  {
+    word: "EeEeEeEe  E e   e",
+    output: { "e  ": "***********", "sp ": "******" },
+  },
+  {
+    word: "India is my country, all Indians are my brothers and sisters",
+    output: {
+      "a  ": "*****",
+      "b  ": "*",
+      "c  ": "*",
+      "d  ": "***",
+      "e  ": "***",
+      "h  ": "*",
+      "i  ": "******",
+      "l  ": "**",
+      "m  ": "**",
+      "n  ": "*****",
+      "o  ": "**",
+      "r  ": "*****",
+      "s  ": "******",
+      "sp ": "**********",
+      "t  ": "***",
+      "u  ": "*",
+      "y  ": "***",
+      "co ": "*",
+    },
+  },
+];
+
+const testHistogram = (tCases) => {
+  tCases.forEach((tCase, idx) => {
+    if (
+      JSON.stringify(tCase.output) === JSON.stringify(histogram(tCase.word))
+    ) {
+      console.log(
+        `Testcase for ${idx} passed. Output is ${JSON.stringify(histogram(tCase.word))}`
+      );
+    } else {
+      console.log(
+        `Testcase for ${idx} failed. The expected result was ${
+          tCase.output
+        }, but got ${histogram(tCase.word)}`
+      );
+    }
+  });
+};
+
+console.log(testHistogram(testCases));
