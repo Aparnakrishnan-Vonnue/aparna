@@ -1,11 +1,11 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
-import HomeScreen from './.src/screen/HomeScreen';
-import DetailsScreen from './.src/screen/DetailsScreen';
-import PaymentScreen from './.src/screen/PaymentScreen';
+import HomeScreen from './src/screen/HomeScreen';
+import DetailsScreen from './src/screen/DetailsScreen';
+import PaymentScreen from './src/screen/PaymentScreen';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import TabNavigator from './.src/navigators/TabNavigator'
+import TabNavigator from './src/navigators/TabNavigator'
 
 const Stack = createNativeStackNavigator();
 

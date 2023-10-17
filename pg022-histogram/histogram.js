@@ -1,41 +1,3 @@
-// for eg: if the input text is
-// "hello world." then the output should be
-// d  - 1
-// e  - 1
-// h  - 1
-// l  - 3
-// o  - 2
-// r  - 1
-// w  - 1
-// sp - 1
-// .  - 1
-
-function convertWord(inputStr) {
-  let modifiedString = "";
-  let specialCharacters = ["!", "@", "#", "$", "%", "^", "&", "*"];
-  for (let i = 0; i < inputStr.length; i++) {
-    let defaultChar = inputStr[i];
-    switch (defaultChar) {
-      case " ":
-        modifiedString += "sp" + " ";
-        break;
-      case ".":
-        modifiedString += "dt" + " ";
-        break;
-      case ",":
-        modifiedString += "co" + " ";
-        break;
-      default:
-        if (specialCharacters.includes(defaultChar)) {
-          modifiedString += "ot" + " ";
-        } else {
-          modifiedString += defaultChar + " ";
-        }
-    }
-  }
-  return modifiedString.trim().split(" ");
-}
-
 function histogram(givenStr) {
   let inputStr = givenStr.toLowerCase();
   let modifiedArray = convertWord(inputStr);
@@ -84,6 +46,32 @@ function histogram(givenStr) {
   });
 
   return resultantHistogram;
+}
+
+function convertWord(inputStr) {
+  let modifiedString = "";
+  let specialCharacters = ["!", "@", "#", "$", "%", "^", "&", "*"];
+  for (let i = 0; i < inputStr.length; i++) {
+    let defaultChar = inputStr[i];
+    switch (defaultChar) {
+      case " ":
+        modifiedString += "sp" + " ";
+        break;
+      case ".":
+        modifiedString += "dt" + " ";
+        break;
+      case ",":
+        modifiedString += "co" + " ";
+        break;
+      default:
+        if (specialCharacters.includes(defaultChar)) {
+          modifiedString += "ot" + " ";
+        } else {
+          modifiedString += defaultChar + " ";
+        }
+    }
+  }
+  return modifiedString.trim().split(" ");
 }
 
 function sortArray(arr) {
@@ -210,7 +198,9 @@ const testHistogram = (tCases) => {
       JSON.stringify(tCase.output) === JSON.stringify(histogram(tCase.word))
     ) {
       console.log(
-        `Testcase for ${idx} passed. Output is ${JSON.stringify(histogram(tCase.word))}`
+        `Testcase for ${idx} passed. Output is ${JSON.stringify(
+          histogram(tCase.word)
+        )}`
       );
     } else {
       console.log(
