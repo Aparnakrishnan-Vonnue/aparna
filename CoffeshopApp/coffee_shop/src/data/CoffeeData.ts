@@ -1,4 +1,3 @@
-let require: any;
 const CoffeeData = [
   {
     id: 'C1',
