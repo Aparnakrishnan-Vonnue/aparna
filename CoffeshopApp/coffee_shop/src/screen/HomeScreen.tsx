@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useRef, useState} from 'react';
 import {
   Image,
   ScrollView,
@@ -42,9 +42,7 @@ const getCoffeeList = (category: string, data: any) => {
     return data;
   } else {
     let coffeelist = data.filter((item: any) => {
-      if (item.name == category) {
-        console.log(item);
-      }
+      item.name == category;
     });
     return coffeelist;
   }
@@ -63,14 +61,6 @@ const HomeScreen = ({navigation}: any) => {
   });
   const [sortedCoffee, setSortedCoffee] = useState(
     getCoffeeList(categoryIndex.category, CoffeeList),
-  );
-
-  const Category = ({img, title, text}: any) => (
-    <TouchableOpacity>
-      <Image source={img} />
-      <Text>{title}</Text>
-      <Text>{text}</Text>
-    </TouchableOpacity>
   );
 
   const renderCoffeCard = ({item}: any) => (
@@ -103,6 +93,7 @@ const HomeScreen = ({navigation}: any) => {
     />
   );
 
+  const ListRef: any = useRef<FlatList>();
   const tabBarHeight = useBottomTabBarHeight();
 
   return (
@@ -141,13 +132,8 @@ const HomeScreen = ({navigation}: any) => {
             style={styles.TextInputContainer}
           />
           {searchText.length > 0 ? (
-            <TouchableOpacity onPress={() => {}}>
-              <CustomIcon
-                style={styles.InputIcon}
-                name="close"
-                size={FONTSIZE.size_16}
-                color={COLORS.primaryLightGreyHex}
-              />
+            <TouchableOpacity>
+              <CustomIcon name='close' size={25}/>
             </TouchableOpacity>
           ) : (
             <></>
@@ -167,6 +153,10 @@ const HomeScreen = ({navigation}: any) => {
               <TouchableOpacity
                 style={styles.CategoryScrollViewItem}
                 onPress={() => {
+                  ListRef?.current?.scrollToOffset({
+                    animated: true,
+                    offset: 0,
+                  });
                   setCategoryIndex({index: index, category: categories[index]});
                   setSortedCoffee([
                     ...getCoffeeList(categories[index], CoffeeList),
@@ -192,6 +182,7 @@ const HomeScreen = ({navigation}: any) => {
         </ScrollView>
         {/* Coffee flatlist */}
         <FlatList
+          ref={ListRef}
           horizontal
           showsHorizontalScrollIndicator={false}
           data={sortedCoffee}

@@ -46,7 +46,6 @@ const CoffeeCard = ({
   price,
   buttonPressHandler,
 }: CoffeeCardProps) => {
-  console.log(imagelink_square);
   return (
     <LinearGradient
       start={{x: 0, y: 0}}
