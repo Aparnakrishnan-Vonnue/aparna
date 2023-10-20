@@ -1,5 +1,6 @@
 import React, {useRef, useState} from 'react';
 import {
+  Dimensions,
   Image,
   ScrollView,
   StatusBar,
@@ -64,37 +65,65 @@ const HomeScreen = ({navigation}: any) => {
   );
 
   const renderCoffeCard = ({item}: any) => (
-    <CoffeeCard
-      name={item.name}
-      id={item.id}
-      index={item.index}
-      type={item.type}
-      roasted={item.roasted}
-      imagelink_square={item.imagelink_square}
-      special_ingredient={item.special_ingredient}
-      average_rating={item.average_rating}
-      price={item.prices[2]}
-      buttonPressHandler={() => {}}
-    />
+    <TouchableOpacity onPress={navigation.push('Details')}>
+      <CoffeeCard
+        name={item.name}
+        id={item.id}
+        index={item.index}
+        type={item.type}
+        roasted={item.roasted}
+        imagelink_square={item.imagelink_square}
+        special_ingredient={item.special_ingredient}
+        average_rating={item.average_rating}
+        price={item.prices[2]}
+        buttonPressHandler={() => {}}
+      />
+    </TouchableOpacity>
   );
 
   const renderBeansCard = ({item}: any) => (
-    <CoffeeCard
-      name={item.name}
-      id={item.id}
-      index={item.index}
-      type={item.type}
-      roasted={item.roasted}
-      imagelink_square={item.imagelink_square}
-      special_ingredient={item.special_ingredient}
-      average_rating={item.average_rating}
-      price={item.prices[2]}
-      buttonPressHandler={() => {}}
-    />
+    <TouchableOpacity onPress={navigation.push('Details')}>
+      <CoffeeCard
+        name={item.name}
+        id={item.id}
+        index={item.index}
+        type={item.type}
+        roasted={item.roasted}
+        imagelink_square={item.imagelink_square}
+        special_ingredient={item.special_ingredient}
+        average_rating={item.average_rating}
+        price={item.prices[2]}
+        buttonPressHandler={() => {}}
+      />
+    </TouchableOpacity>
   );
 
   const ListRef: any = useRef<FlatList>();
   const tabBarHeight = useBottomTabBarHeight();
+  const searchCoffee = (search: string) => {
+    if (search != '') {
+      ListRef?.current?.scrollToOffset({
+        animated: true,
+        offset: 0,
+      });
+      setCategoryIndex({index: 0, category: categories[0]});
+      setSortedCoffee([
+        ...CoffeeList.filter((item: any) =>
+          item.name.toLowerCase().includes(search.toLowerCase()),
+        ),
+      ]);
+    }
+  };
+
+  const resetSearchCoffee = () => {
+    ListRef?.current?.scrollToOffset({
+      animated: true,
+      offset: 0,
+    });
+    setCategoryIndex({index: 0, category: categories[0]});
+    setSortedCoffee([...CoffeeList]);
+    setSearchText(' ');
+  };
 
   return (
     <View style={styles.ScreenContainer}>
@@ -112,7 +141,10 @@ const HomeScreen = ({navigation}: any) => {
         {/* Search Input */}
 
         <View style={styles.InputContainerComponent}>
-          <TouchableOpacity onPress={() => {}}>
+          <TouchableOpacity
+            onPress={() => {
+              searchCoffee(searchText);
+            }}>
             <CustomIcon
               style={styles.InputIcon}
               name="search"
@@ -127,13 +159,21 @@ const HomeScreen = ({navigation}: any) => {
           <TextInput
             placeholder="Find Your Coffee..."
             value={searchText}
-            onChangeText={text => {}}
+            onChangeText={text => {
+              setSearchText(text);
+              searchCoffee(text);
+            }}
             placeholderTextColor={COLORS.primaryLightGreyHex}
             style={styles.TextInputContainer}
           />
           {searchText.length > 0 ? (
-            <TouchableOpacity>
-              <CustomIcon name='close' size={25}/>
+            <TouchableOpacity onPress={resetSearchCoffee}>
+              <CustomIcon
+                name="close"
+                size={FONTSIZE.size_16}
+                color={COLORS.primaryLightGreyHex}
+                style={styles.InputIcon}
+              />
             </TouchableOpacity>
           ) : (
             <></>
@@ -185,6 +225,11 @@ const HomeScreen = ({navigation}: any) => {
           ref={ListRef}
           horizontal
           showsHorizontalScrollIndicator={false}
+          ListEmptyComponent={
+            <View style={styles.EmptyListContainer}>
+              <Text style={styles.CategoryText}>No Coffee Available</Text>
+            </View>
+          }
           data={sortedCoffee}
           contentContainerStyle={styles.FlatListContainer}
           keyExtractor={item => item.id}
@@ -266,6 +311,12 @@ const styles = StyleSheet.create({
     gap: SPACING.space_20,
     paddingVertical: SPACING.space_20,
     paddingHorizontal: SPACING.space_30,
+  },
+  EmptyListContainer: {
+    width: Dimensions.get('window').width - SPACING.space_30 * 2,
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: SPACING.space_36 * 3.6,
   },
   CoffeeBeansTitle: {
     fontSize: FONTSIZE.size_18,
