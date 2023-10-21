@@ -170,6 +170,6 @@ function returnLongestChainInArray(iArray) {
   console.log(longest);
   return longest
 }
-returnLongestChainInArray(inputArray);
+//returnLongestChainInArray(inputArray);
 
 
