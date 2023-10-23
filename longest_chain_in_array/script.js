@@ -1,4 +1,4 @@
-//ATTEMPT 1
+by//ATTEMPT 1
 // let inputArray = [1, 7, 5, 2, 9];
 
 // function returnLongestChain(iArray) {
@@ -170,6 +170,6 @@ function returnLongestChainInArray(iArray) {
   console.log(longest);
   return longest
 }
-returnLongestChainInArray(inputArray);
+//returnLongestChainInArray(inputArray);
 
 
