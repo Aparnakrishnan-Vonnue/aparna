@@ -23,6 +23,7 @@ export const COLORS = {
   primaryBlackHex: '#0C0F14',
   primaryGreyHex: '#252A32',
   primaryWhiteHex: '#FFFFFF',
+  borderGrey: '#C0C2C9',
 };
 
 interface FontFamily {
