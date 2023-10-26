@@ -5,9 +5,12 @@ import {style} from './style';
 import Drawer from '../../components/Drawer';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {COLORS, FONTSIZE} from '../../theme/theme';
+import {useNavigation} from '@react-navigation/native';
+import {RootStackNavigationProps} from '../../types/navigation';
 
 const HomeScreen = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const navigation = useNavigation<RootStackNavigationProps>();
   const handleMenuPress = () => {
     setIsDrawerOpen(!isDrawerOpen);
   };
@@ -29,7 +32,7 @@ const HomeScreen = () => {
             />
           )}
         </TouchableOpacity>
-        <Text style={style.text}>Chayakkada</Text>
+        <Text style={style.text}>ചായക്കട... ☕</Text>
         <View></View>
       </View>
       <ScrollView contentContainerStyle={style.mainContainer}>

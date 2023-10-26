@@ -25,7 +25,6 @@ export const style = StyleSheet.create({
     fontFamily: FONT_FAMILY.poppins_black,
     fontSize: FONTSIZE.size_24,
     color: COLORS.primaryWhiteHex,
-    fontStyle: 'italic',
   },
 
 });

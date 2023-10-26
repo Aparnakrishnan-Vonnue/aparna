@@ -24,6 +24,9 @@ export const COLORS = {
   primaryGreyHex: '#252A32',
   primaryWhiteHex: '#FFFFFF',
   borderGrey: '#C0C2C9',
+  lightGrey: '#D3D3D3',
+  normalGreen: '#32CD32',
+  normalRed: '#FF0000'
 };
 
 interface FontFamily {
