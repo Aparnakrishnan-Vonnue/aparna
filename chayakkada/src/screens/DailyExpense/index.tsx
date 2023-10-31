@@ -7,7 +7,7 @@ import {
 } from 'react-native';
 import ScreenHeader from '../../components/Common/ScreenHeader';
 import DatePickerElement from '../../components/DatePickerElement';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import {styles} from './style';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import CurrencyInput from 'react-native-currency-input';
@@ -17,10 +17,13 @@ import {CashEntryModal} from './component/CashEntryModal';
 const DailyExpense = () => {
   const [date, setDate] = useState(new Date());
   const [open, setOpen] = useState(false);
-  const [value, setValue] = useState<any>(0);
+  const [cashInValue, setCashInValue] = useState<any>(0);
+  const [cashOutValue, setCashOutValue] = useState<any>(0);
   const [currBalance, setCurrBalance] = useState('0.000');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selected, setSelected] = useState('');
+  const [amount, setAmount] = useState<any>(0);
+  const [isSaved, setIsSaved] = useState(false);
 
   const handleDateConfirm = (date: Date) => {
     setDate(date);
@@ -30,6 +33,20 @@ const DailyExpense = () => {
   const handleSelection = (mode: string) => {
     setIsModalOpen(true);
     setSelected(mode);
+  };
+
+  useEffect(() => {
+    if (isSaved && selected === 'cash_in') {
+      setCashInValue(amount);
+    } else if (isSaved && selected === 'cash_out') {
+      setCashOutValue(amount);
+    }
+  }, [isSaved, selected, amount]);
+
+  const handleSave = (cashMode?: string, addedEntry?: string) => {
+    setIsModalOpen(false);
+    setIsSaved(true);
+    setAmount(Number(addedEntry));
   };
 
   return (
@@ -46,16 +63,16 @@ const DailyExpense = () => {
           </TouchableOpacity>
           <CurrencyInput
             id="1"
-            placeholder="Enter Current Balance..."
+            placeholder="Current Balance..."
             style={styles.balanceText}
-            value={value}
-            onChangeValue={setValue}
+            value={cashInValue}
+            onChangeValue={setCashInValue}
             prefix="₹"
-            delimiter="."
-            separator=","
-            precision={3}
+            delimiter=""
+            precision={0}
             minValue={0}
             onChangeText={formattedValue => setCurrBalance(formattedValue)}
+            editable={false}
           />
         </View>
 
@@ -72,6 +89,8 @@ const DailyExpense = () => {
             placeholder="+ ₹ 0.00"
             style={styles.moneyIn}
             placeholderTextColor={COLORS.normalGreen}
+            value={`+₹  ${cashInValue}`}
+            editable={false}
           />
         </View>
         <View style={styles.moneyInandOut}>
@@ -80,6 +99,8 @@ const DailyExpense = () => {
             placeholder="- ₹ 0.00"
             style={[styles.moneyIn, styles.moneyOut]}
             placeholderTextColor={COLORS.normalRed}
+            value={`-₹ ${cashOutValue}`}
+            editable={false}
           />
         </View>
       </ScrollView>
@@ -99,6 +120,7 @@ const DailyExpense = () => {
         isOpen={isModalOpen}
         setIsOpen={setIsModalOpen}
         cashMode={selected}
+        onSave={handleSave}
       />
     </View>
   );
