@@ -126,7 +126,7 @@ by//ATTEMPT 1
 //   return setOfChains
 // }
 
-// console.log(returnLongestChain(inputArray))
+// //console.log(returnLongestChain(inputArray))
 
 //Attempt 5
 let inputArray = [2, 6, 3, 4, 8, 2, 1, 6, 10];
