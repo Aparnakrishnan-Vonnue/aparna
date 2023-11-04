@@ -42,9 +42,9 @@
 // testLongestChainBtwTwoNumbers(testCases);
 
 // function convergentSeriesMaxLength(num1, num2) {
-  //   let sequence = [num1];
-  //   let numOfIteration = num1;
-  //   let length = 0;
+//     let sequence = [num1];
+//     let numOfIteration = num1;
+//     let length = 0;
 
 //   while (numOfIteration <= num2) {
 //     if (num1 === 0) {
@@ -59,7 +59,7 @@
 //         ? sequence.push(inputNum / 2)
 //         : sequence.push(3 * inputNum + 1);
 //       if (sequence[sequence.length - 1] === 1) {
-  //         if (sequence.length > length) {
+//           if (sequence.length > length) {
 //           length = sequence.length;
 //           sequence = [];
 //         }
@@ -72,41 +72,8 @@
 //   return `The longest convergent series for ${num1}, ${num2} is ${length}`;
 // }
 
-// console.log(convergentSeriesMaxLength(2, 10000000));
-
-
-function convergentSeriesMaxLength(num1, num2) {
-  let sequence = [num1];
-  let numOfIteration = num1;
-  let length = 0;
-  
-  while (numOfIteration <= num2) {
-    if (num1 === 0) {
-      return `this will result in an infinite loop`;
-    }
-    if (!sequence.length) {
-      sequence.push(numOfIteration);
-    }
-    for (let j = 0; j <= sequence.length; j++) {
-      let inputNum = sequence[j];
-      inputNum % 2 === 0
-        ? sequence.push(inputNum / 2)
-        : sequence.push(3 * inputNum + 1);
-        if (sequence[sequence.length - 1] === 1) {
-        if (sequence.length > length) {
-          length = sequence.length;
-          sequence = [];
-        }
-        sequence = [];
-        break;
-      }
-    }
-    numOfIteration++;
-  }
-  return `The longest convergent series for ${num1}, ${num2} is ${length}`;
-}
-
 console.log(convergentSeriesMaxLength(2, 10000000));
+
 
 const testCases = [
   {
@@ -164,3 +131,81 @@ function testLongestChainBtwTwoNumbers(tCases) {
   });
 }
 
+// function convergentSeriesMaxLength(num1, num2) {
+//   let sequence = [num1];//[10]
+//   let numOfIteration = num1;//10
+//   let length = 0;
+//   let dictionary = {};
+
+//   function getSeriesLength(inputNum) {
+//     if (dictionary[inputNum]) {
+//       return dictionary[inputNum];
+//     }
+//     if (inputNum === 1) {
+//       return 1;
+//     }
+//     if (inputNum % 2 === 0) {
+//       return 1 + getSeriesLength(inputNum / 2);
+//     } else {
+//       return 1 + getSeriesLength(3 * inputNum + 1);
+//     }
+//   }
+
+//   while (numOfIteration <= num2) {//10 <= 40
+//     if (num1 === 0) {
+//       return `This will result in an infinite loop`;
+//     }
+//     if (!sequence.length) {
+//       sequence.push(numOfIteration);
+//     }
+//     for (let j = 0; j < sequence.length; j++) {
+//       let inputNum = sequence[j]; //10
+//       let seriesLength = getSeriesLength(inputNum);
+//       if (seriesLength > length) {
+//         length = seriesLength;
+//         dictionary[inputNum] = length;
+//       }
+//       if (sequence[sequence.length - 1] === 1) {
+//         sequence = [];
+//         break;
+//       }
+//     }
+//     numOfIteration++;
+//   }
+//   console.log(dictionary);
+//   return `The longest convergent series for ${num1}, ${num2} is ${length}`;
+// }
+
+// console.log(convergentSeriesMaxLength(1, 100000));
+
+function convergentSeriesMaxLength(num1, num2) {
+  let sequence = [num1];
+  let numOfIteration = num1;
+  let length = 0;
+  let dictionary = {}
+
+while (numOfIteration <= num2) {
+  if (num1 === 0) {
+    return `this will result in an infinite loop`;
+  }
+  if (!sequence.length) {
+    sequence.push(numOfIteration);
+  }
+  for (let j = 0; j <= sequence.length; j++) {
+    let inputNum = sequence[j];
+    inputNum % 2 === 0
+      ? sequence.push(inputNum / 2)
+      : sequence.push(3 * inputNum + 1);
+    if (sequence[sequence.length - 1] === 1) {
+        if (sequence.length > length) {
+        length = sequence.length;
+        sequence = [];
+      }
+      sequence = [];
+      break;
+    }
+  }
+  numOfIteration++;
+}
+return `The longest convergent series for ${num1}, ${num2} is ${length}`;
+}
