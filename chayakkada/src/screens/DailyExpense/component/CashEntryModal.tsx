@@ -1,3 +1,4 @@
+import * as React from 'react';
 import {SetStateAction, useState} from 'react';
 import BottomSheet from '../../../components/BottomSheet';
 import {
@@ -14,21 +15,20 @@ import CurrencyInput from 'react-native-currency-input';
 interface CashEntryProps {
   isOpen: boolean;
   setIsOpen: React.Dispatch<SetStateAction<boolean>>;
-  cashMode?: string;
+  cashMode: string;
+  onSave: (addedEntry: number) => void;
 }
 export const CashEntryModal = ({
   isOpen,
   setIsOpen,
   cashMode,
+  onSave,
 }: CashEntryProps) => {
-  const [addedEntry, setAddedEntry] = useState('');
+  const [addedEntry, setAddedEntry] = useState(0);
   const [value, setValue] = useState<any>(0);
   const [displayDetails, setDisplayDetails] = useState(false);
 
-  const handleSave = (cashMode?: string ) => {
-    console.log(cashMode)
-    setIsOpen(false)
-  };
+  console.log(addedEntry);
 
   return (
     <BottomSheet isOpen={isOpen} setIsOpen={setIsOpen}>
@@ -42,7 +42,7 @@ export const CashEntryModal = ({
         precision={3}
         prefix="INR "
         onChangeValue={setValue}
-        onChangeText={text => setAddedEntry(text)}
+        onChangeText={text => setAddedEntry(+text.slice(4))}
         onFocus={() => setDisplayDetails(true)}
       />
       {displayDetails && (
@@ -57,7 +57,7 @@ export const CashEntryModal = ({
       )}
       <TouchableOpacity
         style={styles.saveButton}
-        onPress={() => handleSave(cashMode)}>
+        onPress={() => onSave(addedEntry)}>
         <Text style={styles.saveText}>Save</Text>
       </TouchableOpacity>
     </BottomSheet>

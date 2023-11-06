@@ -1,3 +1,4 @@
+import * as React from 'react';
 import {
   ScrollView,
   Text,
@@ -35,6 +36,12 @@ const DailyExpense = () => {
     setSelected(mode);
   };
 
+  const handleSave = (addedEntry: number) => {
+    setIsSaved(true);
+    setAmount(addedEntry);
+    setIsModalOpen(false);
+  };
+
   useEffect(() => {
     if (isSaved && selected === 'cash_in') {
       setCashInValue(amount);
@@ -42,12 +49,6 @@ const DailyExpense = () => {
       setCashOutValue(amount);
     }
   }, [isSaved, selected, amount]);
-
-  const handleSave = (cashMode?: string, addedEntry?: string) => {
-    setIsModalOpen(false);
-    setIsSaved(true);
-    setAmount(Number(addedEntry));
-  };
 
   return (
     <View>
