@@ -1,4 +1,4 @@
-import {Text, View} from 'react-native';
+import {View} from 'react-native';
 import ScreenHeader from '../../components/Common/ScreenHeader';
 
 export const Stockouts = () => {

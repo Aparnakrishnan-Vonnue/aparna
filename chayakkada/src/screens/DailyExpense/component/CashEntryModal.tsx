@@ -42,7 +42,12 @@ export const CashEntryModal = ({
         precision={3}
         prefix="INR "
         onChangeValue={setValue}
-        onChangeText={text => setAddedEntry(+text.slice(4))}
+        onChangeText={text => {
+          const numericValue = parseFloat(
+            text.replace('INR ', '').replace(',', ''),
+          );
+          setAddedEntry(numericValue);
+        }}
         onFocus={() => setDisplayDetails(true)}
       />
       {displayDetails && (

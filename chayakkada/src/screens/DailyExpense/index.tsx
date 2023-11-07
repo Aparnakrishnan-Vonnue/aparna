@@ -14,6 +14,8 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import CurrencyInput from 'react-native-currency-input';
 import {COLORS} from '../../theme/theme';
 import {CashEntryModal} from './component/CashEntryModal';
+import {RemarksSheet} from './component/RemarksSheet';
+import Spacer from '../../components/Common/Spacer';
 
 const DailyExpense = () => {
   const [date, setDate] = useState(new Date());
@@ -66,7 +68,7 @@ const DailyExpense = () => {
             id="1"
             placeholder="Current Balance..."
             style={styles.balanceText}
-            value={cashInValue}
+            value={cashInValue - cashOutValue}
             onChangeValue={setCashInValue}
             prefix="₹"
             delimiter=""
@@ -104,6 +106,8 @@ const DailyExpense = () => {
             editable={false}
           />
         </View>
+        <Spacer space={25} />
+        <RemarksSheet />
       </ScrollView>
       <View style={styles.buttonContainer}>
         <TouchableOpacity
