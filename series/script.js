@@ -196,12 +196,18 @@ function convergentSeriesMaxLength(num1, num2) {
       if (sequence[sequence.length - 1] === 1) {
         if (sequence.length > length) {
           length = sequence.length;
+          for (let i = 0; i < sequence.length; i++) {
+            for(let n = 0; n < dictionary.length; n++){
+              if(dictionary[n] === sequence[i]){
+
+                
+              }
+            }
+            dictionary.push({
+              [sequence[i]]: sequence.length - i,
+            });
+          }
           sequence = [];
-        }
-        for(let i = 0; i < sequence.length + 1; i++){
-          dictionary.push({
-            [sequence[i]]: sequence.length - i
-          })
         }
         sequence = [];
         break;
@@ -209,7 +215,7 @@ function convergentSeriesMaxLength(num1, num2) {
     }
     numOfIteration++;
   }
-  console.log(dictionary);
+  console.log(dictionary)
   return `The longest convergent series for ${num1}, ${num2} is ${length}`;
 }
 
