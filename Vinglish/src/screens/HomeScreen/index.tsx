@@ -1,5 +1,5 @@
 import React from 'react';
-import {Image, Text, View} from 'react-native';
+import {Image, Text, TouchableOpacity, View} from 'react-native';
 import Button from '../../components/Button';
 import ScreenWrapper from '../../components/ScreenWrapper';
 import {styles} from './styles';
@@ -7,6 +7,10 @@ import BottomSheet from '../../components/BottomSheet';
 import {useState} from 'react';
 import {dictionary} from '../../data';
 import Spacer from '../../components/Spacer';
+import Drawer from '../../components/Drawer';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import {FONTSIZES} from '../../themes/font';
+import {COLORS} from '../../themes/colors';
 
 interface Dictionary {
   word: string;
@@ -18,6 +22,7 @@ interface Dictionary {
 
 const HomeScreen = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [currentWordObj, setCurrentWordObj] = useState<Dictionary>({
     word: '',
     meaning: '',
@@ -38,6 +43,21 @@ const HomeScreen = () => {
 
   return (
     <ScreenWrapper style={styles.screenWrapper}>
+      <TouchableOpacity onPress={() => setIsDrawerOpen(!isDrawerOpen)}>
+        {!isDrawerOpen ? (
+          <Icon
+            name="navicon"
+            size={FONTSIZES.md}
+            color={COLORS.action.tertiary}
+          />
+        ) : (
+          <Icon
+            name="close"
+            size={FONTSIZES.md}
+            color={COLORS.action.tertiary}
+          />
+        )}
+      </TouchableOpacity>
       <View style={styles.imageContainer}>
         <Image
           source={require('../../assets/images/books.jpg')}
@@ -82,6 +102,7 @@ const HomeScreen = () => {
           onClick={() => setIsModalOpen(false)}
         />
       </BottomSheet>
+      <Drawer isOpen={isDrawerOpen} />
     </ScreenWrapper>
   );
 };
