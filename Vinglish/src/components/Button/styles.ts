@@ -15,7 +15,7 @@ export const styles = StyleSheet.create({
     backgroundColor: COLORS.action.primary,
   },
   buttonSecondary: {
-    backgroundColor: COLORS.action.tertiary,
+    backgroundColor: COLORS.action.quarternary,
   },
   ghostButton: {
     borderColor: COLORS.border.secondary,
@@ -36,7 +36,7 @@ export const styles = StyleSheet.create({
     color: COLORS.text.secondary,
   },
   buttonTextSecondary: {
-    color: COLORS.text.secondary,
+    color: COLORS.text.primary,
   },
   ghostButtonText: {
     color: COLORS.text.primary,

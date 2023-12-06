@@ -6,6 +6,7 @@ export const COLORS = {
     primary: '#DA70D6',
     secondary: '#FFFFFF',
     tertiary: '#808080',
+    quarternary: '#96EFFF',
     success: '#16FF00',
     error: '#FE0000',
   },
